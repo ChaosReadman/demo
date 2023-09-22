@@ -1,5 +1,13 @@
++ Install Java Development Kit(openjdk 17.0.8.1)
+  Download from following url
+  https://www.oracle.com/java/technologies/downloads/#jdk17-windows
+
++ Install gradle 8.3
+  follow the url
+  https://gradle.org/install/
+
 <pre>
-  chaos@xxx:~/java_lecture/sbTest/demo$ java --version
+chaos@xxx:~/java_lecture/sbTest/demo$ java --version
 openjdk 17.0.8.1 2023-08-24
 OpenJDK Runtime Environment (build 17.0.8.1+1-Ubuntu-0ubuntu120.04)
 OpenJDK 64-Bit Server VM (build 17.0.8.1+1-Ubuntu-0ubuntu120.04, mixed mode, sharing)
