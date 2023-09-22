@@ -1,4 +1,5 @@
-chaos@xxx:~/java_lecture/sbTest/demo$ java --version
+<pre>
+  chaos@xxx:~/java_lecture/sbTest/demo$ java --version
 openjdk 17.0.8.1 2023-08-24
 OpenJDK Runtime Environment (build 17.0.8.1+1-Ubuntu-0ubuntu120.04)
 OpenJDK 64-Bit Server VM (build 17.0.8.1+1-Ubuntu-0ubuntu120.04, mixed mode, sharing)
@@ -18,3 +19,4 @@ JVM:          17.0.8.1 (Private Build 17.0.8.1+1-Ubuntu-0ubuntu120.04)
 OS:           Linux 5.15.90.1-microsoft-standard-WSL2+ amd64
 
 chaos@xxx:~/java_lecture/sbTest/demo$ 
+</pre>
