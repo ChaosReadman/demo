@@ -1,0 +1,47 @@
+
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>hello world</title>
+        <link rel="stylesheet" th:href="@{/common_style.css}"/>
+    </head>
+    <body>
+        <p>
+        こんにちは<span style="background-color:blue;color: white;">hello world</span>ニイハオ
+        </p>
+        <div class="topnews">
+            <p>トップニュース</p>
+        </div>
+        <div class="topchat" style="width:400px; height:200px;background-color: aqua;">
+            <p>チャット</p>
+
+        </div>
+        <form name="main" onreset="reset_onreset_form()">
+            <div>
+                <button class="common" type="submit">送信</button>
+                <button class="common" type="reset" onclick="reset_onclick_button()">reset</button>
+            </div>
+            <input type="text" value="default text" onchange="onchange_text()">
+            <div>
+            <input type="text" value="aiueo" onchange="console.log(1);" style="width:100px"><BR>
+            <select style="width:100px">
+                <option>a</option>
+                <option>b</option>
+                <option>c</option>
+                <option>d</option>
+            </select>
+            </div>
+            <input type="text" size="4em" maxlength="4">/<input type="text" size="2em" maxlength="2">/<input type="text" size="2em" maxlength="2">
+        </form>
+<script language="javaScript">
+    function reset_onreset_form(){
+        console.log("reset_onreset_form")
+    }
+    function reset_onclick_button(){
+        console.log("reset_onclick_button");
+    }
+    function onchange_text(){
+        console.log("onchange_text")
+    }
+</script>
+    </body>
+</html>
