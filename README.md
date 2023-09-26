@@ -1,6 +1,6 @@
 + Install Java Development Kit(openjdk 17.0.8.1)
   Download from following url
-  https://www.oracle.com/java/technologies/downloads/#jdk17-windows
+  https://learn.microsoft.com/ja-jp/java/openjdk/download#openjdk-17
 
 + Install gradle 8.3
   follow the url
