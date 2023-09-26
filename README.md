@@ -2,17 +2,19 @@
   Download from following url
   https://learn.microsoft.com/ja-jp/java/openjdk/download#openjdk-17
 
-+ Install gradle 8.3
-  follow the url
-  https://gradle.org/install/
-
 <pre>
 chaos@xxx:~/java_lecture/sbTest/demo$ java --version
 openjdk 17.0.8.1 2023-08-24
 OpenJDK Runtime Environment (build 17.0.8.1+1-Ubuntu-0ubuntu120.04)
 OpenJDK 64-Bit Server VM (build 17.0.8.1+1-Ubuntu-0ubuntu120.04, mixed mode, sharing)
 chaos@xxx:~/java_lecture/sbTest/demo$ gradle --version
+</pre>
 
++ Install gradle 8.3
+  follow the url
+  https://gradle.org/install/
+  
+<pre>
 ------------------------------------------------------------
 Gradle 8.3
 ------------------------------------------------------------
