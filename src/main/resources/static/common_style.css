@@ -1,6 +1,14 @@
-div.topnews{
+div{
     font-family: Impact, sans-serif;
+
+}
+.topnews{
     background-color: hsl(199, 70%, 59%);
     width:400px;
     height: 200px;
+}
+.topchat{
+    background-color: aqua;
+    width:400px;
+    height:200px;
 }
