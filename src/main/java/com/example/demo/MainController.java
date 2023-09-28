@@ -13,4 +13,8 @@ public class MainController {
     String support(){
         return ("support");
     }
+    @GetMapping("/login")
+    String login(){
+        return ("login");
+    }
 }
