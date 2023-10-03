@@ -30,3 +30,12 @@ OS:           Linux 5.15.90.1-microsoft-standard-WSL2+ amd64
 
 chaos@xxx:~/java_lecture/sbTest/demo$ 
 </pre>
+
++ Spring Securityの実装
+  
+こちらを参考に Spring Securityの実装をしました
+https://b1san-blog.com/post/spring/spring-sec-start/
+application.propertiesに  
+user:hoge  
+pwd:fuga  
+で設定してあります  
