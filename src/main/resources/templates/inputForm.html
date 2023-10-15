@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://tymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>入力フォーム</title>
+
+</head>
+<body>
+    <form th:action="@{/form}" th:object="${user}" method="post">
+        <label>氏名</label>
+        <input type="text" th:field="*{name}"><br>
+        <label>メール</label>
+        <input type="text" th:field="*{email}"><br>
+        <label>年齢</label>
+        <input type="text" th:field="*{age}"><br>
+        <button>送信</button>
+    </form>
+
+</body>
+</html>

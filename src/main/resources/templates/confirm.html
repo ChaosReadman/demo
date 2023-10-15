@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns:th="http://tymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>確認フォーム</title>
+
+</head>
+<body>
+    <form th:action="@{/form}" th:object="${user}" method="post">
+        氏名：[[${user.name}]]
+        メール：[[${user.email}]]
+        年齢：[[${user.age}]]
+    </form>
+</body>
+</html>

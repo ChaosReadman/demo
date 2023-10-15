@@ -28,10 +28,10 @@ Ant:          Apache Ant(TM) version 1.10.13 compiled on January 4 2023
 JVM:          17.0.8.1 (Private Build 17.0.8.1+1-Ubuntu-0ubuntu120.04)
 OS:           Linux 5.15.90.1-microsoft-standard-WSL2+ amd64
 
-chaos@xxx:~/java_lecture/sbTest/demo$ 
+
 </pre>
 
-+ Spring Securityの実装
++ Implements Spring Security
   
 こちらを参考に Spring Securityの実装をしました
 https://b1san-blog.com/post/spring/spring-sec-start/
@@ -39,3 +39,5 @@ application.propertiesに
 user:hoge  
 pwd:fuga  
 で設定してあります  
+
++ Implements Model
