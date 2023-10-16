@@ -41,3 +41,4 @@ pwd:fuga
 で設定してあります  
 
 + Implements Model
+Modell Attribute を介してページ間のデータ(名前、メール、年齢）を受け渡すまで作成
