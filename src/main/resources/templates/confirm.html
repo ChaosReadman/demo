@@ -7,10 +7,10 @@
 
 </head>
 <body>
-    <form th:action="@{/form}" th:object="${user}" method="post">
-        氏名：[[${user.name}]]
-        メール：[[${user.email}]]
-        年齢：[[${user.age}]]
+    <form th:object="${user}" >
+        氏名：[[${user.name}]]<br>
+        メール：[[${user.email}]]<br>
+        年齢：[[${user.age}]]<br>
     </form>
 </body>
 </html>
