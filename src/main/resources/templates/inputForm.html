@@ -7,7 +7,7 @@
 
 </head>
 <body>
-    <form th:action="@{/form}" th:object="${user}" method="post">
+    <form th:action="@{/form}" th:object="${userInfo}" method="post">
         <label>氏名</label>
         <input type="text" th:field="*{name}"><br>
         <label>メール</label>

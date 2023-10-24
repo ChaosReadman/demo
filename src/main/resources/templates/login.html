@@ -1,12 +1,15 @@
-<html>
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 <head>
     <meta charset="UTF-8">
-    <title>ログイン</title>
+    <title>ログインページ</title>
+    <meta charset="UTF-8">
 </head>
 
 <body>
-    <form>
+    <h1>ログインページ</h1>
+    <form method="post" action="index.html" th:action="@{/login}">
         <table>
             <thead>
                 <tr>
@@ -16,15 +19,16 @@
             </thead>
             <tbody>
                 <tr>
-                    <td>ID:</td>
-                    <td><input type="text" name="ID"></td>    
+                    <td>ユーザー名:</td>
+                    <td><input type="text" name="username"></td>
                 </tr>
                 <tr>
-                    <td>PWD:</td>
-                    <td><input type="text" name="PWD"></td>    
+                    <td>パスワード:</td>
+                    <td><input type="text" name="password"></td>
                 </tr>
             </tbody>
         </table>
+        <button type="submit">ログイン</button>
     </form>
 </body>
 
