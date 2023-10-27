@@ -21,7 +21,7 @@ public class MainController {
     String login(){
         return ("login");
     }
-        @GetMapping("/form")
+    @GetMapping("/form")
     private String inputForm(@ModelAttribute UserInfo userInfo){
         return "inputForm";
     }
