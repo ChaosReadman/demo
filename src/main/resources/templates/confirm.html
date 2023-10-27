@@ -8,7 +8,8 @@
 </head>
 <body>
     <form th:object="${userInfo}" >
-        氏名：[[${userInfo.name}]]<br>
+        姓：[[${userInfo.lastName}]]<br>
+        名：[[${userInfo.firstName}]]<br>
         メール：[[${userInfo.email}]]<br>
         年齢：[[${userInfo.age}]]<br>
     </form>

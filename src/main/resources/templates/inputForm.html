@@ -8,8 +8,10 @@
 </head>
 <body>
     <form th:action="@{/form}" th:object="${userInfo}" method="post">
-        <label>氏名</label>
-        <input type="text" th:field="*{name}"><br>
+        <label>姓</label>
+        <input type="text" th:field="*{lastName}"><br>
+        <label>名</label>
+        <input type="text" th:field="*{firstName}"><br>
         <label>メール</label>
         <input type="text" th:field="*{email}"><br>
         <label>年齢</label>
