@@ -41,7 +41,6 @@ pwd:fuga
 + Implements Model  
   Modell Attribute を介してページ間のデータ(名前、メール、年齢）を受け渡すまで作成
 
-
 + Implements H2 JPA with Spring Security and customize Login form  
   + SecurityConfig.java を作成し、ログイン画面のカスタマイズ設定を行った
   + H2-Consoleに関しては、ログインの必要が無い設定も行っている  
@@ -50,3 +49,8 @@ pwd:fuga
   + カスタマイズしたログイン画面が動くようにlogin.htmlを修正
   + 初期ページをindex.htmlへ改名し、inputFormへ遷移するボタンを実装
 
++ Implements Account Authentication with DB Table
+  + アカウント認証をテーブルのデータで行うための実装を行いました
+    + user1, pass
+    + user2, password
+  
