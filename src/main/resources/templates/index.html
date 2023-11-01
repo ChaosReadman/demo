@@ -6,9 +6,7 @@
         <link rel="stylesheet" th:href="@{/common_style.css}"/>
     </head>
     <body>
-        <p>
-        こんにちは<span style="background-color:blue;color: white;">hello world</span>ニイハオ
-        </p>
+        <span class="loginUser" style="background-color:blue;color: white;" th:text="'ログインユーザー：' + ${userName}" />
         <form id="menu">
             <button type="submit" formaction="form">入力画面へ</button>
         </form>

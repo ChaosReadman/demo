@@ -53,4 +53,5 @@ pwd:fuga
   + アカウント認証をテーブルのデータで行うための実装を行いました
     + user1, pass
     + user2, password
+  + ログインユーザーをindex.htmlに表示しました
   
