@@ -15,6 +15,7 @@ import com.example.demo.model.UserInfo;
 public class MainController {
     @GetMapping("/")
     String index(@AuthenticationPrincipal User user, Model model){
+        // @AuthenticationPrincipal で user にキャストされた情報が入ってくるので、Modelへ情報を渡し、画面で表示する
         System.out.println(user.getUsername());
         model.addAttribute("userName",user.getUsername());
         return ("index");
