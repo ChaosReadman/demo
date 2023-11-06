@@ -1,5 +1,8 @@
 package com.example.demo.controller;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
@@ -8,7 +11,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import com.example.demo.model.Account;
 import com.example.demo.model.UserInfo;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 
 @Controller
@@ -17,7 +25,20 @@ public class MainController {
     String index(@AuthenticationPrincipal User user, Model model){
         // @AuthenticationPrincipal で user にキャストされた情報が入ってくるので、Modelへ情報を渡し、画面で表示する
         System.out.println(user.getUsername());
+        System.out.println(user.getAuthorities().toString());
+        ObjectMapper mapper = new ObjectMapper();
+        List<Account> account = new ArrayList<Account>();
+        try {
+            account = mapper.readValue(user.getAuthorities().toString(),new TypeReference<List<Account>>() {});
+        } catch (JsonMappingException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } catch (JsonProcessingException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
         model.addAttribute("userName",user.getUsername());
+        model.addAttribute("nickName",account.get(0).getNickName());
         return ("index");
     }
     @GetMapping("/support")
