@@ -12,16 +12,22 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
-@Table(name="account")
+@Table(name = "account")
 public class Account {
     @Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column
     private int id;
 
-    @Column(name="user_name")
+    @Column(columnDefinition="VARCHAR(128) default ''")
     private String userName;
 
-    @Column(name="password")
+    @Column(columnDefinition="VARCHAR(512) default ''")
     private String password;
+
+    @Column(columnDefinition="VARCHAR(128) default ''")
+    private String nickName;
+
+    @Column(columnDefinition = "VARCHAR(8) default '00000001'")
+    private String privileges;
 }
