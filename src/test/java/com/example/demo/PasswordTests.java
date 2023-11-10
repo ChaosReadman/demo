@@ -25,5 +25,7 @@ public class PasswordTests {
     {
         System.out.println("pass:" + encoder.encode("pass"));
         System.out.println("password:" + encoder.encode("password"));
+        //pass:$2a$10$9G7pysJ88hLbyjkUc.Frnu8W2pMaqPPGSRXVNDh6Y6OHwJ1Mtmk96
+        //password:$2a$10$J6LDh3aYHgPtx5YYSvM6Zu.aRzIg4s03RFamgx1C8nmednbecZycm
     }
 }
