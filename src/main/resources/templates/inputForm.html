@@ -7,6 +7,7 @@
 
 </head>
 <body>
+    <div th:insert="navbar">  </div>
     <form th:action="@{/form}" th:object="${userInfo}" method="post">
         <label>姓</label>
         <input type="text" th:field="*{lastName}"><br>

@@ -7,15 +7,13 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
 @Entity
-@Table(name = "account")
-public class Account {
+public class MessageBoard {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column
@@ -25,13 +23,7 @@ public class Account {
     private String userName;
 
     @Column(columnDefinition="VARCHAR(512) default ''")
-    private String password;
-
-    @Column(columnDefinition="VARCHAR(128) default ''")
-    private String nickName;
-
-    @Column(columnDefinition = "VARCHAR(8) default '00000001'")
-    private String privileges;
+    private String message;
 
     @Column(columnDefinition="VARCHAR(128) default 'SYSTEM'")
     private String lastUpdateUser;

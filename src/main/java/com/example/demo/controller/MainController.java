@@ -18,18 +18,15 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-
 @Controller
 public class MainController {
-    @GetMapping("/")
-    String index(@AuthenticationPrincipal User user, Model model){
-        // @AuthenticationPrincipal で user にキャストされた情報が入ってくるので、Modelへ情報を渡し、画面で表示する
-        System.out.println(user.getUsername());
-        System.out.println(user.getAuthorities().toString());
+
+    void setUserInfo(User user, Model model) {
         ObjectMapper mapper = new ObjectMapper();
         List<Account> account = new ArrayList<Account>();
         try {
-            account = mapper.readValue(user.getAuthorities().toString(),new TypeReference<List<Account>>() {});
+            account = mapper.readValue(user.getAuthorities().toString(), new TypeReference<List<Account>>() {
+            });
         } catch (JsonMappingException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
@@ -37,25 +34,36 @@ public class MainController {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
-        model.addAttribute("userName",user.getUsername());
-        model.addAttribute("nickName",account.get(0).getNickName());
+        model.addAttribute("userName", user.getUsername());
+        model.addAttribute("nickName", account.get(0).getNickName());
+    }
+
+    @GetMapping("/")
+    String index(@AuthenticationPrincipal User user, Model model) {
+        // @AuthenticationPrincipal で user にキャストされた情報が入ってくるので、Modelへ情報を渡し、画面で表示する
+        setUserInfo(user, model);
         return ("index");
     }
+
     @GetMapping("/support")
-    String support(){
+    String support() {
         return ("support");
     }
+
     @GetMapping("/login")
-    String login(){
+    String login() {
         return ("login");
     }
+
     @GetMapping("/form")
-    private String inputForm(@ModelAttribute UserInfo userInfo){
+    private String inputForm(@AuthenticationPrincipal User user, @ModelAttribute UserInfo userInfo, Model model) {
+        setUserInfo(user, model);
         return "inputForm";
     }
 
     @PostMapping("/form")
-    private String confirmForm(@ModelAttribute UserInfo userInfo){
+    private String confirmForm(@AuthenticationPrincipal User user, @ModelAttribute UserInfo userInfo, Model model) {
+        setUserInfo(user, model);
         return "confirm";
     }
 }

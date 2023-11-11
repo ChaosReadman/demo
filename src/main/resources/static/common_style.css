@@ -1,14 +1,54 @@
-div{
+div {
     font-family: Impact, sans-serif;
 
 }
-.topnews{
+
+.topNews {
     background-color: hsl(199, 70%, 59%);
-    width:400px;
+    width: 400px;
     height: 200px;
 }
-.topchat{
+
+.topChat {
     background-color: aqua;
-    width:400px;
-    height:200px;
+    width: 400px;
+    height: 200px;
+}
+
+.navbar {
+    background-color: dodgerblue;
+    margin: 5px;
+    position: relative;
+    height: 35px;
+}
+
+.navButtons{
+    background-color: rgb(125, 169, 230);
+    color: white;
+    position: absolute;
+    height: 35px;
+    width: auto;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.navButtons button{
+    background-color: rgb(125, 169, 230);
+    color: white;
+    justify-content: center;
+    height: 30px;
+    width: auto;
+    position: relative;
+    margin: 0 auto;
+}
+
+.userInfo {
+    background-color: dodgerblue;
+    color: white;
+    display: flex;
+    align-items: right;
+    top: 5px;
+    justify-content: right;
+    margin: 5px;
 }

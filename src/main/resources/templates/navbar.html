@@ -1,0 +1,20 @@
+<html>
+
+<head>
+    <link rel="stylesheet" th:href="@{/common_style.css}" />
+</head>
+
+<body>
+    <form class="navbar" id="navbar">
+        <div class="userInfo">
+            <span class="loginUser" th:text="'ログインユーザー：' + ${userName}" />
+            <span class="loginUser" th:text="'ニックネーム：' + ${nickName}" />
+        </div>
+        <div class="navButtons">
+            <button type="submit" formaction="/">TOP</button>
+            <button type="submit" formaction="form">入力画面</button>
+        </div>
+    </form>
+</body>
+
+</html>
