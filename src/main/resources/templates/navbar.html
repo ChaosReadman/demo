@@ -6,9 +6,9 @@
 
 <body>
     <form class="navbar" id="navbar">
-        <div class="userInfo">
-            <span class="loginUser" th:text="'ログインユーザー：' + ${userName}" />
-            <span class="loginUser" th:text="'ニックネーム：' + ${nickName}" />
+        <div class="userInfo" th:object="${account}">
+            <span class="loginUser" th:text="'ログインユーザー：' + *{userName}" />
+            <span class="loginUser" th:text="'ニックネーム：' + *{nickName}" />
         </div>
         <div class="navButtons">
             <button type="submit" formaction="/">TOP</button>
