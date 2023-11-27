@@ -15,7 +15,7 @@ import lombok.Setter;
 @Setter
 @Entity
 @Table(name = "account")
-public class Account implements Cloneable{
+public class Account {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column
