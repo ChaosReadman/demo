@@ -13,7 +13,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
-public class MessageBoard {
+public class messageBoard {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column

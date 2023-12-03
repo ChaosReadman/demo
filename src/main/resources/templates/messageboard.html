@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://tymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>掲示板</title>
+
+</head>
+
+<body>
+    <div th:insert="~{navbar}"> </div>
+    <form th:action="@{/postmessage}" th:object="${mb}" method="post">
+        <label>メッセージ</label>
+        <input type="text" th:readonly="${true}" th:field="*{userName}">
+        <input type="text" th:field="*{message}">
+        <button type="submit">送信</button>
+    </form>
+
+    <form>
+        <table>
+            <tr th:each="mb : ${mbl}">
+                <td th:text="${mb.userName}"></td>
+                <td th:text="${mb.message}"></td>
+            </tr>
+        </table>
+    </form>
+</body>
+
+</html>

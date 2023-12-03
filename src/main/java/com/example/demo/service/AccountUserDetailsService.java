@@ -36,7 +36,6 @@ public class AccountUserDetailsService implements UserDetailsService{
         try {
             json = ow.writeValueAsString(account);
         } catch (JsonProcessingException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
         Collection<GrantedAuthority> authorities = new ArrayList<>();

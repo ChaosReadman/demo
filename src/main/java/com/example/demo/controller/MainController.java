@@ -3,6 +3,7 @@ package com.example.demo.controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
@@ -12,13 +13,18 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import com.example.demo.model.Account;
 import com.example.demo.model.UserInfo;
+import com.example.demo.model.messageBoard;
+import com.example.demo.repository.messageBoardRepository;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+
 @Controller
 public class MainController {
+    @Autowired
+    messageBoardRepository mbr;
 
     void setAccountInfo(User user,Account account) {
         ObjectMapper mapper = new ObjectMapper();
@@ -59,12 +65,34 @@ public class MainController {
     private String inputForm(@AuthenticationPrincipal User user, @ModelAttribute UserInfo userInfo,@ModelAttribute Account account) {
         setAccountInfo(user,account);
         
-        return "inputForm";
+        return ("inputForm");
     }
 
     @PostMapping("/form")
-    private String confirmForm(@AuthenticationPrincipal User user, @ModelAttribute UserInfo userInfo,@ModelAttribute Account account) {
+    private String confirmForm(@AuthenticationPrincipal User user, @ModelAttribute UserInfo userInfo,@ModelAttribute Account account){
         setAccountInfo(user,account);
-        return "confirm";
+        return ("confirm");
+    }
+    
+    @GetMapping("/messageboard")
+    public String messageBoard(@AuthenticationPrincipal User user, @ModelAttribute Account account,@ModelAttribute("mb") messageBoard mb, @ModelAttribute("mbl") ArrayList<messageBoard> mbl) {
+        setAccountInfo(user,account);
+        mb.setUserName(account.getNickName());
+        ArrayList<messageBoard> mblTmp = (ArrayList<messageBoard>) mbr.findAll();
+        for (messageBoard messageBoard : mblTmp) {
+            mbl.add(messageBoard);
+        }
+        return ("messageboard");
+    }
+    
+    @PostMapping("/postmessage")
+    public String insertmsg(@AuthenticationPrincipal User user, @ModelAttribute Account account,@ModelAttribute("mb") messageBoard mb, @ModelAttribute("mbl") ArrayList<messageBoard> mbl){
+        setAccountInfo(user,account);
+        mbr.insert(mb);
+        ArrayList<messageBoard> mblTmp = (ArrayList<messageBoard>) mbr.findAll();
+        for (messageBoard messageBoard : mblTmp) {
+            mbl.add(messageBoard);
+        }
+        return ("messageboard");
     }
 }
