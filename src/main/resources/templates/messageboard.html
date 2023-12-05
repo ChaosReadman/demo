@@ -8,21 +8,102 @@
 </head>
 
 <body>
-    <div th:insert="~{navbar}"> </div>
-    <form th:action="@{/postmessage}" th:object="${mb}" method="post">
-        <label>メッセージ</label>
-        <input type="text" th:readonly="${true}" th:field="*{userName}">
-        <input type="text" th:field="*{message}">
-        <button type="submit">送信</button>
-    </form>
+    <script type="text/javascript">
+        setInterval(function () {
+            refreshMsg();
+        }, 5000);
 
+        function postMsg() {
+            var header = document.getElementById("csrf").name;
+            var token = document.getElementById("csrf").value;
+            const url = "/insertmsg";
+            let data = JSON.stringify({
+                userName: document.getElementById("user").value,
+                message: document.getElementById("message").value
+            });
+
+            const req = new XMLHttpRequest();
+            req.withCredentials = true;
+            req.open("POST", url);
+
+            req.onreadystatechange = function () {
+                if (req.readyState == XMLHttpRequest.DONE) {
+                    let status = req.status;
+                    if (status === 0 || (status >= 200 && status < 400)) {
+                        document.getElementById("message").value="";
+                        refreshMsg();
+                    } else {
+                        // エラー処理
+                        alert("HTTP-ERROR: " + status);
+                    }
+                }
+            }
+            req.setRequestHeader(header, token);
+            req.setRequestHeader('Content-type', 'application/json; charset=utf-8');
+            req.send(data);
+        }
+
+        function refreshMsg(){
+            var header = document.getElementById("csrf").name;
+            var token = document.getElementById("csrf").value;
+            const url = "/getmsg";
+            let data = JSON.stringify({
+                userName: document.getElementById("user").value,
+                message: document.getElementById("message").value
+            });
+
+            const req = new XMLHttpRequest();
+            req.withCredentials = true;
+            req.open("GET", url);
+
+            req.onreadystatechange = function () {
+                if (req.readyState == XMLHttpRequest.DONE) {
+                    let status = req.status;
+                    if (status === 0 || (status >= 200 && status < 400)) {
+                        refreshTbl(req.responseText);
+                    } else {
+                        // エラー処理
+                        alert("HTTP-ERROR: " + status);
+                    }
+                }
+            }
+            req.setRequestHeader(header, token);
+            req.setRequestHeader('Content-type', 'application/json; charset=utf-8');
+            req.send();
+        }
+
+        function refreshTbl(tjs){
+            var js = JSON.parse(tjs);
+            var tr;
+            var td;
+            var tb = document.getElementById("msgs");
+            tb.innerHTML = "";
+            js.forEach(element => {
+                tr = document.createElement("tr");
+                td = document.createElement("td");
+                td.innerHTML = element.userName;
+                tr.appendChild(td);
+                td = document.createElement("td");
+                td.innerHTML = element.message;
+                tr.appendChild(td);
+                tb.appendChild(tr);
+            });
+        }
+    </script>
+    <div th:insert="~{navbar}"> </div>
+    <div id="msg">
+        <label>メッセージ</label>
+        <input id="csrf" type="hidden" th:name="${_csrf.headerName}" th:value="${_csrf.token}" />
+        <input id="user" type="text" th:readonly="${true}" th:field="${mb.userName}">
+        <input id="message" type="text" th:field="${mb.message}">
+        <button id="send" onclick="postMsg();">送信</button>
+        <!--
+        <button id="send" onclick="refreshMsg();">更新</button>
+        -->
+    </div>
     <form>
-        <table>
-            <tr th:each="mb : ${mbl}">
-                <td th:text="${mb.userName}"></td>
-                <td th:text="${mb.message}"></td>
-            </tr>
-        </table>
+        <table id="msgs">
+       </table>
     </form>
 </body>
 
