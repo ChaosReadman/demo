@@ -47,11 +47,6 @@
             var header = document.getElementById("csrf").name;
             var token = document.getElementById("csrf").value;
             const url = "/getmsg";
-            let data = JSON.stringify({
-                userName: document.getElementById("user").value,
-                message: document.getElementById("message").value
-            });
-
             const req = new XMLHttpRequest();
             req.withCredentials = true;
             req.open("GET", url);
