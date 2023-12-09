@@ -10,12 +10,12 @@
         <div class="userInfo" th:object="${account}">
             <span class="loginUser" th:text="'ログインユーザー：' + *{userName}" />
             <span class="loginUser" th:text="'ニックネーム：' + *{nickName}" />
+            <button type="submit" formaction="/logout" formmethod="post">ログアウト</button>
         </div>
         <div class="navButtons">
             <button type="submit" formaction="/">TOP</button>
             <button type="submit" formaction="form">入力画面</button>
             <button type="submit" formaction="messageboard">掲示板</button>
-            <button type="submit" formaction="/logout" formmethod="post">ログアウト</button>
         </div>
     </form>
 </body>
