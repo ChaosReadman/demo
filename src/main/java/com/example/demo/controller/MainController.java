@@ -60,6 +60,12 @@ public class MainController {
         return ("login");
     }
 
+    @PostMapping("/logout")
+    public String performLogout() {
+        // .. perform logout
+        return "login";
+    }
+
     @GetMapping("/form")
     private String inputForm(@AuthenticationPrincipal User user, @ModelAttribute UserInfo userInfo,
             @ModelAttribute Account account) {
@@ -83,6 +89,5 @@ public class MainController {
 
         return ("messageboard");
     }
-
 
 }
