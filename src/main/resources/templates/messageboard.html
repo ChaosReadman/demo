@@ -59,6 +59,9 @@
                     let status = req.status;
                     if (status === 0 || (status >= 200 && status < 400)) {
                         refreshTbl(req.responseText);
+                        var  mf = document.getElementsByClassName("msgform");
+
+                        mf[0].scrollTo(0, msgs.scrollHeight);
                     } else {
                         // エラー処理
                         alert("HTTP-ERROR: " + status);
@@ -99,7 +102,7 @@
         <button id="send" onclick="refreshMsg();">更新</button>
         -->
     </div>
-    <form>
+    <form class="msgform">
         <table id="msgs">
         </table>
     </form>

@@ -52,3 +52,9 @@ div {
     justify-content: right;
     margin: 5px;
 }
+
+form.msgform {
+    background-color: rgb(199, 216, 241);
+    height:400px;
+    overflow-y:auto;
+}
