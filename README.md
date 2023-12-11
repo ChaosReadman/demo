@@ -1,6 +1,7 @@
 + Notification
   + jdk21およびgradl8.5にしたのでマニュアルインストールの手順をそれに合わせて修正しました
   + MessageBoard.javaのファイル名をmessageBoard.javaに変更しましたが、Windows環境ではうまく反映できないので、手でリネームをしてください
+  +  以下手順でjdkとgradleをインストールしたのち、.vacodeと.grasleを削除して再起動をするとおそらくビルドとラウンチが出来るようになると思います
 
 + Install Java Development Kit(openjdk 21)  
 
