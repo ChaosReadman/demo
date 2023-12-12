@@ -73,21 +73,14 @@
             req.send();
         }
 
+        //掲示板の投稿内容の表示を更新
         function refreshTbl(tjs) {
             var js = JSON.parse(tjs);
-            var tr;
-            var td;
             var tb = document.getElementById("msgs");
-            tb.innerHTML = "";
+            tb.innerText = "";
             js.forEach(element => {
-                tr = document.createElement("tr");
-                td = document.createElement("td");
-                td.innerHTML = element.userName;
-                tr.appendChild(td);
-                td = document.createElement("td");
-                td.innerHTML = element.message;
-                tr.appendChild(td);
-                tb.appendChild(tr);
+                addElm = `<tr><td>${element.userName}</td><td>${element.message}</td></tr>`
+                tb.innerHTML += addElm
             });
         }
     </script>
