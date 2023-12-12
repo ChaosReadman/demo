@@ -70,17 +70,15 @@
         }
 
         function refreshTbl(tjs) {
+            debugger;
             var js = JSON.parse(tjs);
             var tr;
             var td;
             var tb = document.getElementById("msgs");
             tb.innerHTML = "";
             js.forEach(element => {
-                tr = document.createElement("tr");
-                td = document.createElement("td");
-                td.innerHTML = element.message;
-                tr.appendChild(td);
-                tb.appendChild(tr);
+                tb.innerHTML += 
+                '<tr><td><textarea>' + element.message + '</textarea></td></tr>';
             });
         }
     </script>
