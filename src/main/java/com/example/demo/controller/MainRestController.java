@@ -9,7 +9,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.demo.model.information;
 import com.example.demo.model.messageBoard;
+import com.example.demo.repository.informationRepository;
 import com.example.demo.repository.messageBoardRepository;
 import com.fasterxml.jackson.core.JsonGenerationException;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -20,6 +22,9 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 public class MainRestController {
     @Autowired
     messageBoardRepository mbr;
+
+    @Autowired
+    informationRepository infor;
 
     @PostMapping("/insertmsg")
     public ResponseEntity<?> insertmsg(@RequestBody messageBoard mb) {
@@ -33,6 +38,33 @@ public class MainRestController {
     @GetMapping("/getmsg")
     public ResponseEntity<?> getmsg(){
         ArrayList<messageBoard> mblTmp = (ArrayList<messageBoard>) mbr.findAll();
+        ObjectMapper mapper = new ObjectMapper();
+    
+        try {
+            return ResponseEntity.ok().body(mapper.writeValueAsString(mblTmp));
+        }
+        catch (JsonGenerationException | JsonMappingException  e) {
+            // catch various errors
+            e.printStackTrace();
+        } catch (JsonProcessingException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        return ResponseEntity.badRequest().build();
+    }
+
+    @PostMapping("/insertinfo")
+    public ResponseEntity<?> insertinfo(@RequestBody information info) {
+        if(!info.getMessage().equals("")){
+            infor.insert(info);
+            info.setMessage("");
+        }
+        return ResponseEntity.ok().build();
+    }
+
+    @GetMapping("/getinfo")
+    public ResponseEntity<?> getinfo(){
+        ArrayList<information> mblTmp = (ArrayList<information>) infor.findAll();
         ObjectMapper mapper = new ObjectMapper();
     
         try {

@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import com.example.demo.model.Account;
 import com.example.demo.model.UserInfo;
+import com.example.demo.model.information;
 import com.example.demo.model.messageBoard;
 import com.example.demo.repository.messageBoardRepository;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -88,6 +89,14 @@ public class MainController {
         mb.setUserName(account.getNickName());
 
         return ("messageboard");
+    }
+
+    @GetMapping("/information")
+    public String notion(@AuthenticationPrincipal User user, @ModelAttribute Account account,
+            @ModelAttribute("info") information info) {
+        setAccountInfo(user, account);
+
+        return ("information");
     }
 
 }

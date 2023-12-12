@@ -6,40 +6,17 @@
         <link rel="stylesheet" th:href="@{/common_style.css}"/>
     </head>
     <body>
-        <div th:insert="~{navbar}">  </div>
+        <div th:insert="~{navbar}" />
+        
         <div class="topnews">
-            <p>トップニュース</p>
+            <p><b>トップニュース</b></p>
         </div>
         <div class="topchat">
-            <p>チャット</p>
+            <p><b>チャット</b></p>
         </div>
-        <form name="main" onreset="reset_onreset_form()">
-            <div>
-                <button class="common" type="submit">送信</button>
-                <button class="common" type="reset" onclick="reset_onclick_button()">reset</button>
-            </div>
-            <input type="text" value="default text" onchange="onchange_text()">
-            <div>
-            <input type="text" value="aiueo" onchange="console.log(1);" style="width:100px"><BR>
-            <select style="width:100px">
-                <option>a</option>
-                <option>b</option>
-                <option>c</option>
-                <option>d</option>
-            </select>
-            </div>
-            <input type="text" size="4em" maxlength="4">/<input type="text" size="2em" maxlength="2">/<input type="text" size="2em" maxlength="2">
-        </form>
-<script language="javaScript">
-    function reset_onreset_form(){
-        console.log("reset_onreset_form")
-    }
-    function reset_onclick_button(){
-        console.log("reset_onclick_button");
-    }
-    function onchange_text(){
-        console.log("onchange_text")
-    }
-</script>
+
+        <script type="text/javascript">
+
+        </script>
     </body>
 </html>
