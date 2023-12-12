@@ -30,7 +30,7 @@
                     let status = req.status;
                     if (status === 0 || (status >= 200 && status < 400)) {
                         document.getElementById("message").value = "";
-                        refreshMsg();
+                        refresInfo();
                     } else {
                         // エラー処理
                         alert("HTTP-ERROR: " + status);
@@ -54,7 +54,7 @@
                 if (req.readyState == XMLHttpRequest.DONE) {
                     let status = req.status;
                     if (status === 0 || (status >= 200 && status < 400)) {
-                        refreshTbl(req.responseText);
+                        refreshInfoTbl(req.responseText);
                         var  form = document.getElementsByClassName("infoform");
 
                         form[0].scrollTo(0, msgs.scrollHeight);
@@ -69,12 +69,11 @@
             req.send();
         }
 
-        function refreshTbl(tjs) {
-            debugger;
+        function refreshInfoTbl(tjs) {
             var js = JSON.parse(tjs);
             var tr;
             var td;
-            var tb = document.getElementById("msgs");
+            var tb = document.getElementById("infos");
             tb.innerHTML = "";
             js.forEach(element => {
                 tb.innerHTML += 
@@ -90,7 +89,7 @@
         <button id="send" onclick='postInfo();'>送信</button>
     </div>
     <form class="infoform">
-        <table id="msgs">
+        <table id="infos">
         </table>
     </form>
 </body>
