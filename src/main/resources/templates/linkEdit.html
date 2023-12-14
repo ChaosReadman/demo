@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html xmlns:th="http://tymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <title>外部リンク編集</title>
+  </head>
+
+  <body onload="init()">
+    <script type="text/javascript">
+      function init() {
+        refreshLnk();
+      }
+
+      function postLnk() {
+        debugger;
+        var header = document.getElementById("csrf").name;
+        var token = document.getElementById("csrf").value;
+        const url = "/insertlink";
+        let data = JSON.stringify({
+          title: document.getElementById("title").value,
+          url: document.getElementById("url").value,
+        });
+
+        const req = new XMLHttpRequest();
+        req.withCredentials = true;
+        req.open("POST", url);
+
+        req.onreadystatechange = function () {
+          if (req.readyState == XMLHttpRequest.DONE) {
+            let status = req.status;
+            if (status === 0 || (status >= 200 && status < 400)) {
+              document.getElementById("title").value = "";
+              document.getElementById("url").value = "";
+              refreshLnk();
+            } else {
+              // エラー処理
+              alert("HTTP-ERROR: " + status);
+            }
+          }
+        };
+        req.setRequestHeader(header, token);
+        req.setRequestHeader("Content-type", "application/json; charset=utf-8");
+        req.send(data);
+      }
+
+      function refreshLnk() {
+        var header = document.getElementById("csrf").name;
+        var token = document.getElementById("csrf").value;
+        const url = "/getlink";
+        const req = new XMLHttpRequest();
+        req.withCredentials = true;
+        req.open("GET", url);
+
+        req.onreadystatechange = function () {
+          if (req.readyState == XMLHttpRequest.DONE) {
+            let status = req.status;
+            if (status === 0 || (status >= 200 && status < 400)) {
+              refreshTbl(req.responseText);
+            } else {
+              // エラー処理
+              alert("HTTP-ERROR: " + status);
+            }
+          }
+        };
+        req.setRequestHeader(header, token);
+        req.setRequestHeader("Content-type", "application/json; charset=utf-8");
+        req.send();
+      }
+
+      function refreshTbl(tjs) {
+        var js = JSON.parse(tjs);
+        var tr;
+        var td;
+        var tb = document.getElementById("urls");
+        tb.innerHTML = "";
+        js.forEach((element) => {
+          tb.innerHTML += 
+          "<tr><td><a href='"+element.url+"'>"+element.title+"</a></td></tr>";
+        });
+      }
+    </script>
+    <div th:insert="~{navbar}"></div>
+    <div id="msg">
+      <label>リンク</label>
+      <input
+        id="csrf"
+        type="hidden"
+        th:name="${_csrf.headerName}"
+        th:value="${_csrf.token}"
+      />
+      
+      <input id="title" type="text" th:field="${lnk.title}" />
+      <input id="url" type="text" th:field="${lnk.url}" />
+      <button id="send" onclick="postLnk();">送信</button>
+      <!--
+        <button id="send" onclick="refreshMsg();">更新</button>
+        -->
+    </div>
+      <table id="urls"></table>
+  </body>
+</html>
