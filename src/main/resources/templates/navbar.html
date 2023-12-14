@@ -10,14 +10,38 @@
         <div class="userInfo" th:object="${account}">
             <span class="loginUser" th:text="'ログインユーザー：' + *{userName}" />
             <span class="loginUser" th:text="'ニックネーム：' + *{nickName}" />
-            <button type="submit" formaction="/logout" formmethod="post">ログアウト</button>
+            <div class="accountMenu">
+                <input type="checkbox" id="accountMenu_check">
+                <label for="accountMenu_check" class="accountMenu_box">
+                    <span></span>
+                </label>
+                <div class="accountMenu_content">
+                    <ul class="accountMenu_list">
+                        <li class="accountMenu_item">
+                            <button class="accountMenu_botton" type="submit" formaction="#">個人情報編集</button>
+                        </li>
+                        <li class="accountMenu_item">
+                            <button class="accountMenu_botton" type="submit" formaction="informationEdit">おしらせ投稿</button>
+                        </li>
+                        <li class="accountMenu_item">
+                            <button class="accountMenu_botton" type="submit" formaction="#">ユーザ管理</button>
+                        </li>
+                        <li class="accountMenu_item">
+                            <button class="accountMenu_botton" type="submit" formaction="linkEdit">外部リンク編集</button>
+                        </li>
+                        <li class="accountMenu_item">
+                            <button class="accountMenu_botton" type="submit" formaction="/logout"
+                                formmethod="post">ログアウト</button>
+                        </li>
+                    </ul>
+                </div>
+            </div>
         </div>
         <div class="navButtons">
             <button type="submit" formaction="/">TOP</button>
             <button type="submit" formaction="form">入力画面</button>
             <button type="submit" formaction="messageboard">掲示板</button>
-            <button type="submit" formaction="information">おしらせ投稿</button>
-            <button type="submit" formaction="linkEdit">リンク編集</button>
+            <button type="submit" formaction="link">外部リンク</button>
         </div>
     </form>
 </body>

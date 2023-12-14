@@ -53,6 +53,81 @@ div {
     margin: 5px;
 }
 
+.accountMenu_box {
+    position: fixed;
+    top: 0;
+    right: 0;
+    display: flex;
+    height: 60px;
+    width: 60px;
+    justify-content: center;
+    align-items: center;
+    z-index: 90;
+    background-color: dodgerblue;
+}
+
+.accountMenu_box span,
+.accountMenu_box span:before,
+.accountMenu_box span:after {
+  content: "";
+  display: block;
+  height: 3px;
+  width: 25px;
+  border-radius: 3px;
+  background: #ffffff;
+  position: absolute;
+}
+.accountMenu_box span:before {
+  bottom: 8px;
+}
+.accountMenu_box span:after {
+  top: 8px;
+}
+#accountMenu_check {
+  display: none;
+}
+#accountMenu_check:checked ~ .accountMenu_box span {
+  background: rgba(255, 255, 255, 0);
+}
+#accountMenu_check:checked ~ .accountMenu_box span::before {
+  bottom: 0;
+  transform: rotate(45deg);
+}
+#accountMenu_check:checked ~ .accountMenu_box span::after {
+  top: 0;
+  transform: rotate(-45deg);
+}
+#accountMenu_check:checked ~ .accountMenu_content {
+    left: 70%;
+}
+.accountMenu_content {
+  width: 30%;
+  height: 100%;
+  position: fixed;
+  top: 60px;    
+  left: 100%;
+  z-index: 80;
+  background-color: dodgerblue;
+  transition: all 0.5s;
+}
+.accountMenu_list {
+  padding: 0 10px 0;
+}
+.accountMenu_item {
+  border-bottom: solid 1px #ffffff;
+  list-style: none;
+}
+
+.accountMenu_botton {
+    border: 0;
+    width: 100%;
+    font-size: 15px;
+    text-align: left;
+    padding: 9px 15px 10px 0;
+    color: #ffffff;
+    background-color: dodgerblue;
+}
+
 form.msgform {
     background-color: rgb(199, 216, 241);
     height:400px;

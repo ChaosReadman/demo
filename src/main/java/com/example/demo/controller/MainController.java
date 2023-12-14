@@ -92,12 +92,12 @@ public class MainController {
         return ("messageboard");
     }
 
-    @GetMapping("/information")
+    @GetMapping("/informationEdit")
     public String information(@AuthenticationPrincipal User user, @ModelAttribute Account account,
             @ModelAttribute("info") information info) {
         setAccountInfo(user, account);
 
-        return ("information");
+        return ("informationEdit");
     }
 
     @GetMapping("/linkEdit")
