@@ -30,7 +30,7 @@
                     let status = req.status;
                     if (status === 0 || (status >= 200 && status < 400)) {
                         document.getElementById("message").value = "";
-                        refresInfo();
+                        refreshInfo();
                     } else {
                         // エラー処理
                         alert("HTTP-ERROR: " + status);
