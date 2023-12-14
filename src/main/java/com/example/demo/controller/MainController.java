@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import com.example.demo.model.Account;
 import com.example.demo.model.UserInfo;
 import com.example.demo.model.information;
+import com.example.demo.model.link;
 import com.example.demo.model.messageBoard;
 import com.example.demo.repository.messageBoardRepository;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -92,11 +93,19 @@ public class MainController {
     }
 
     @GetMapping("/information")
-    public String notion(@AuthenticationPrincipal User user, @ModelAttribute Account account,
+    public String information(@AuthenticationPrincipal User user, @ModelAttribute Account account,
             @ModelAttribute("info") information info) {
         setAccountInfo(user, account);
 
         return ("information");
+    }
+
+    @GetMapping("/linkEdit")
+    public String linkEdit(@AuthenticationPrincipal User user, @ModelAttribute Account account,
+            @ModelAttribute("lnk") link lnk) {
+        setAccountInfo(user, account);
+
+        return ("linkEdit");
     }
 
 }
