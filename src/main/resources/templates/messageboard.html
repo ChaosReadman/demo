@@ -89,6 +89,11 @@
         }
     </script>
     <div th:insert="~{navbar}"> </div>
+    <div id="pageTitle">けいじばん</div>
+    <form class="msgform">
+        <table id="msgs">
+        </table>
+    </form>
     <div id="msg">
         <label>メッセージ</label>
         <input id="csrf" type="hidden" th:name="${_csrf.headerName}" th:value="${_csrf.token}" />
@@ -99,10 +104,6 @@
         <button id="send" onclick="refreshMsg();">更新</button>
         -->
     </div>
-    <form class="msgform">
-        <table id="msgs">
-        </table>
-    </form>
 </body>
 
 </html>

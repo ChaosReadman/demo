@@ -125,7 +125,7 @@ div {
     text-align: left;
     padding: 9px 15px 10px 0;
     color: #ffffff;
-    background-color: dodgerblue;
+    /* background-color: dodgerblue; */
 }
 
 form.msgform {
@@ -136,19 +136,24 @@ form.msgform {
 
 form.msgform table{
     width: 100%;
-    /* border-collapse: collapse; テーブルのボーダーを表示するために必要 */
     border-collapse: collapse;
-    /* border-spacing: 20px 0px; */
-    /* padding: 10px 0px; */
-    /* cellspacing:  */
 }
 
 form.msgform table tbody{ 
     border-top: solid #aaa 1px; 
-    border-bottom: solid #aaa 1px;
-    /* margin: 10px 0px; */
 }
 
 form.msgform table tbody tr td {
     display: block;
+}
+
+#pageTitle {
+    margin: 0px auto;
+    text-align: center;
+    padding: 60px 0px;
+    font-size: 3vmax;
+}
+
+#msg {
+    margin: 40px 0px;
 }
