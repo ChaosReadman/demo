@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -84,15 +85,15 @@ public class MainRestController {
     }
 
     @PostMapping("/insertlink")
-    public ResponseEntity<?> insertlink(@RequestBody link lnk) {
+    public ResponseEntity<?> insertlink(@RequestBody @Validated link lnk) {
         if (!lnk.getTitle().equals("") || !lnk.getUrl().equals("")) {
             linkr.insert(lnk);
         }
         return ResponseEntity.ok().build();
     }
 
-    @GetMapping("/geturl")
-    public ResponseEntity<?> geturl() {
+    @GetMapping("/getlink")
+    public ResponseEntity<?> getlink() {
         ArrayList<link> mblTmp = (ArrayList<link>) linkr.findAll();
         ObjectMapper mapper = new ObjectMapper();
 

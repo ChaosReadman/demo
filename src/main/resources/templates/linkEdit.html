@@ -15,7 +15,7 @@
         debugger;
         var header = document.getElementById("csrf").name;
         var token = document.getElementById("csrf").value;
-        const url = "/insertlnk";
+        const url = "/insertlink";
         let data = JSON.stringify({
           title: document.getElementById("title").value,
           url: document.getElementById("url").value,
@@ -46,7 +46,7 @@
       function refreshLnk() {
         var header = document.getElementById("csrf").name;
         var token = document.getElementById("csrf").value;
-        const url = "/geturl";
+        const url = "/getlink";
         const req = new XMLHttpRequest();
         req.withCredentials = true;
         req.open("GET", url);
