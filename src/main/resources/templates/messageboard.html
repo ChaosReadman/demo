@@ -4,7 +4,6 @@
 <head>
     <meta charset="UTF-8">
     <title>掲示板</title>
-
 </head>
 
 <body onload="init()">
@@ -22,7 +21,7 @@
             const url = "/insertmsg";
             let data = JSON.stringify({
                 userName: document.getElementById("user").value,
-                message: document.getElementById("message").value
+                message: document.getElementById("message").value,
             });
 
             const req = new XMLHttpRequest();
@@ -79,7 +78,12 @@
             var tb = document.getElementById("msgs");
             tb.innerText = "";
             js.forEach(element => {
-                addElm = `<tr><td>${element.userName}</td><td>${element.message}</td></tr>`
+                //element.lastUpdateDateに格納されたタイムスタンプから、ユーザーが見やすい表記に変換する
+                const date = new Date(element.lastUpdateDate); 
+                const showDate = `${date.getFullYear()}/${date.getMonth()+1}/${date.getDate()} ${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`
+                
+                addElm = `<tr><td>${showDate}</td>`
+                addElm += `<td>${element.userName} ${element.message}</td></tr>`
                 tb.innerHTML += addElm
             });
         }
