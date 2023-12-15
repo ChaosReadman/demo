@@ -146,6 +146,10 @@ form.msgform .msgRow div {
   padding: 10px;
 }
 
+.saidMsg {
+  overflow-wrap: break-word;
+}
+
 #pageTitle {
     margin: 0px auto;
     text-align: center;
