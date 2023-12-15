@@ -100,6 +100,14 @@ public class MainController {
         return ("informationEdit");
     }
 
+    @GetMapping("/link")
+    public String link(@AuthenticationPrincipal User user, @ModelAttribute Account account,
+            @ModelAttribute("lnk") link lnk) {
+        setAccountInfo(user, account);
+
+        return ("link");
+    }
+
     @GetMapping("/linkEdit")
     public String linkEdit(@AuthenticationPrincipal User user, @ModelAttribute Account account,
             @ModelAttribute("lnk") link lnk) {

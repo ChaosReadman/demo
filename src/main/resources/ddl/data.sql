@@ -14,4 +14,6 @@ INSERT INTO message_board (user_name, message) values ('John','ん？');
 INSERT INTO message_board (user_name, message) values ('Stella','すみませんでした！');
 INSERT INTO message_board (user_name, message) values ('John','気にすんな！');
 
+INSERT INTO link (title, url) values ('google', 'https://www.google.com');
+INSERT INTO link (title, url) values ('msn', 'https://www.msn.com/ja-jp');
 

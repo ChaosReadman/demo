@@ -15,6 +15,12 @@ div {
     height: 200px;
 }
 
+.linkList {
+  background-color: lightpink;
+  width: 400px;
+  height: 200px;
+}
+
 .navbar {
     background-color: dodgerblue;
     margin: 5px;
