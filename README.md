@@ -95,4 +95,29 @@ pwd:fuga
 
 + 掲示板の実装をしました
    
++ 外部リンクの実装をしました
+
++ メモ
+  + git pull 時にcan't resolve host
+  <pre>
+  sudo vi /etc/resolve.conf
+  以下２行を追加
+  nameserver 8.8.8.8
+  nameserver 8.8.8.4
+  </pre>
   
+  + git pull 時にTLS関連のエラー
+  <pre>
+  git config --global http.sslVerify false
+  </pre>
+  + WSL2とつながらない
+    理由は様々あるようです
+    + WSLのアップデート
+      <pre>
+      sudo apt update
+      sudo apt upgrade
+      </pre>
+    + Extentionのインストール
+      + [WSL](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-wsl)
+      + [Remote Development](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.vscode-remote-extensionpack)
+   
