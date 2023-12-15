@@ -10,6 +10,12 @@
 <body>
     <h1>ログインページ</h1>
     <form method="post" action="index.html" th:action="@{/login}">
+        <div th:if="${param.error}">
+            ログインに失敗しました
+            <div th:if="${session[SPRING_SECURITY_LAST_EXCEPTION] != null}">
+                <span th:text="${session[SPRING_SECURITY_LAST_EXCEPTION].message}"></span>
+            </div>
+        </div>
         <table>
             <thead>
                 <tr>
