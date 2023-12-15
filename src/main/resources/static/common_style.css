@@ -1,18 +1,15 @@
-div {
+.topChat, .topNews{
     font-family: Impact, sans-serif;
-
+    width: 400px;
+    height: 200px;
 }
 
 .topNews {
     background-color: hsl(199, 70%, 59%);
-    width: 400px;
-    height: 200px;
 }
 
 .topChat {
     background-color: aqua;
-    width: 400px;
-    height: 200px;
 }
 
 .linkList {
@@ -135,22 +132,18 @@ div {
 }
 
 form.msgform {
-    background-color: rgb(199, 216, 241);
+    background-color: #eee;
     height: 400px;
+    width: 100%;
     overflow-y:auto;
 }
 
-form.msgform table{
-    width: 100%;
-    border-collapse: collapse;
+form.msgform .msgRow{ 
+    border-top: solid #ccc 1px; 
 }
 
-form.msgform table tbody{ 
-    border-top: solid #aaa 1px; 
-}
-
-form.msgform table tbody tr td {
-    display: block;
+form.msgform .msgRow div {
+  padding: 10px;
 }
 
 #pageTitle {

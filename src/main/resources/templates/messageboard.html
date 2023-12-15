@@ -78,22 +78,29 @@
             var tb = document.getElementById("msgs");
             tb.innerText = "";
             js.forEach(element => {
-                //element.lastUpdateDateに格納されたタイムスタンプから、ユーザーが見やすい表記に変換する
+                //element.lastUpdateDateに格納されたタイムスタンプから、ユーザーが見やすい表記に変換して表示
                 const date = new Date(element.lastUpdateDate); 
-                const showDate = `${date.getFullYear()}/${date.getMonth()+1}/${date.getDate()} ${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`
+                const showDate = `${date.getFullYear()}/${date.getMonth()+1}/${date.getDate()} ${date.getHours()}時${date.getMinutes()}分${date.getSeconds()}秒`
                 
-                addElm = `<tr><td>${showDate}</td>`
-                addElm += `<td>${element.userName} ${element.message}</td></tr>`
+                //DOM操作
+                addElm =  `<div class='msgRow'>`
+                addElm += `<div>${showDate}</div>`
+                addElm += `<div><span>${element.userName}</span> : <span>${element.message}</span></div>`
+                addElm += `</div>`    
                 tb.innerHTML += addElm
             });
         }
     </script>
+
     <div th:insert="~{navbar}"> </div>
-    <div id="pageTitle">けいじばん</div>
-    <form class="msgform">
-        <table id="msgs">
-        </table>
+
+    <div id="pageTitle">掲示板</div>
+
+    <!-- 掲示板本体 -->
+    <form class="msgform" id="msgs">
     </form>
+
+    <!-- メッセージ入力欄 -->
     <div id="msg">
         <label>メッセージ</label>
         <input id="csrf" type="hidden" th:name="${_csrf.headerName}" th:value="${_csrf.token}" />
