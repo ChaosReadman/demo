@@ -38,13 +38,11 @@
 
         function refreshLinkTbl(tjs) {
             var js = JSON.parse(tjs);
-            var tr;
-            var td;
             var tb = document.getElementById("links");
             tb.innerHTML = "";
             js.forEach((element) => {
                 tb.innerHTML +=
-                    "<tr><td><a href='" + element.url + "'>" + element.title + "</a></td></tr>";
+                    "<tr><td><a href='" + element.url + "' target='_blank' rel='noopener noreferrer'>" + element.title + "</a></td></tr>";
             });
         }
     </script>
