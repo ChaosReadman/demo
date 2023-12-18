@@ -1,22 +1,29 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+    
+    <head>
+        <meta charset="UTF-8">
+        <title>エニィ・倶楽部</title>
+        <link rel="stylesheet" th:href="@{/common_style.css}" />
+    </head>
+    
+    <body onload="init();">
+        <div th:insert="~{navbar}" />
+        <input id="csrf" type="hidden" th:name="${_csrf.headerName}" th:value="${_csrf.token}" />
+        
+        <div class="topnews">
+            <p><b>お知らせ</b></p>
+            <div class="infoform">
+                <table id="infos">
+                </table>
+            </div>
+        </div>
+        <div class="topchat">
+            <p><b>掲示板</b></p>
+            <div class="msgform" id="msgs"></div>
+        </div>
 
-<head>
-    <meta charset="UTF-8">
-    <title>エニィ・倶楽部</title>
-    <link rel="stylesheet" th:href="@{/common_style.css}" />
-</head>
-
-<body onload="init();">
+    <script th:src="@{/js/refreshMsg.js}"></script>
     <script type="text/javascript">
-        function init() {
-            // お知らせを更新
-            refreshInfo();
-            // 定期的に掲示板を更新
-            refreshMsg();
-            setInterval(function () {
-                refreshMsg();
-            }, 5000);
-        }
         function refreshInfo() {
             var header = document.getElementById("csrf").name;
             var token = document.getElementById("csrf").value;
@@ -55,67 +62,8 @@
                 '<tr><td><textarea>' + element.message + '</textarea></td></tr>';
             });
         }
-
-        function refreshMsg() {
-            var header = document.getElementById("csrf").name;
-            var token = document.getElementById("csrf").value;
-            const url = "/getmsg";
-            const req = new XMLHttpRequest();
-            req.withCredentials = true;
-            req.open("GET", url);
-
-            req.onreadystatechange = function () {
-                if (req.readyState == XMLHttpRequest.DONE) {
-                    let status = req.status;
-                    if (status === 0 || (status >= 200 && status < 400)) {
-                        refreshTbl(req.responseText); var
-                            mf = document.getElementsByClassName("msgform"); mf[0].scrollTo(0, msgs.scrollHeight);
-                    } else { // エラー処理
-                        alert("HTTP-ERROR: " + status);
-                    }
-                }
-            }
-            req.setRequestHeader(header, token);
-            req.setRequestHeader('Content-type', 'application/json; charset=utf-8');
-            req.send();
-        }
-
-        function refreshTbl(tjs) {
-            var js = JSON.parse(tjs);
-            var tr;
-            var td;
-            var tb = document.getElementById("msgs");
-            tb.innerHTML = "";
-            js.forEach(element => {
-                tr = document.createElement("tr");
-                td = document.createElement("td");
-                td.innerHTML = element.userName;
-                tr.appendChild(td);
-                td = document.createElement("td");
-                td.innerHTML = element.message;
-                tr.appendChild(td);
-                tb.appendChild(tr);
-            });
-        }
     </script>
 
-    <div th:insert="~{navbar}" />
-    <input id="csrf" type="hidden" th:name="${_csrf.headerName}" th:value="${_csrf.token}" />
-
-    <div class="topnews">
-        <p><b>お知らせ</b></p>
-        <div class="infoform">
-            <table id="infos">
-            </table>
-        </div>
-    </div>
-    <div class="topchat">
-        <p><b>掲示板</b></p>
-        <div class="msgform">
-            <table id="msgs">
-            </table>
-        </div>
-    </div>
 
 
 </body>
