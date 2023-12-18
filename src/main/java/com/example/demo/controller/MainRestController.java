@@ -120,8 +120,7 @@ public class MainRestController {
         return ResponseEntity.ok().build();
     }
     
-
-        @GetMapping("/getUsers")
+    @GetMapping("/getusers")
     public ResponseEntity<?> getUsers() {
         ArrayList<Account> mblTmp = (ArrayList<Account>) accountr.findAll();
         ObjectMapper mapper = new ObjectMapper();

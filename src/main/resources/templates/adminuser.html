@@ -10,7 +10,7 @@
          function getUsers() {
             var header = document.getElementById("csrf").name;
             var token = document.getElementById("csrf").value;
-            const url = "/getUsers";
+            const url = "/getusers";
             const req = new XMLHttpRequest();
             req.withCredentials = true;
             req.open("GET", url);
@@ -36,18 +36,18 @@
             var dt = document.getElementById("users");
             dt.innerHTML = "";
             js.forEach(element => {
-                tb.innerHTML += 
-                '<div>' + element.userName + '</div><br>';
+                dt.innerHTML += 
+                '<span name="id"> ' + element.id + '</span>' +
+                '<span name="userName">' + element.userName + ' </span>' +
+                '<span name="nickName">' + element.nickName + ' </span><br>';
             });
         }
     </script>
     <div th:insert="~{navbar}">  </div>
-    <form th:object="${account}" >
-        ユーザー名：[[${account.userName}]]<br>
-        ニックネーム：[[${account.nickName}]]<br>
-        メール：[[${account.email}]]<br>
-        年齢：[[${account.age}]]<br>
-    </form>
+    <input id="csrf" type="hidden" th:name="${_csrf.headerName}" th:value="${_csrf.token}" />
+<br>
+<br>
+<br>
 
     <div id="users">
 
