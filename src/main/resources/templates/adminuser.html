@@ -41,7 +41,10 @@
                 '<td name="id"> ' + element.id + '</td>' +
                 '<td name="userName">' + element.userName + ' </td>' +
                 '<td name="nickName">' + element.nickName + ' </td>' +
-                '<td><button formaction="modify?id=' + element.id + '">修正</button></td>' + 
+                '<td><form action="/modifyuser">'+
+                    '<input name="id" value=' + element.id + '>' +
+                    '<button type="submit" >修正</button>' +
+                '</form></td>' + 
                 '<tr>';
             });
         }
@@ -51,9 +54,7 @@
 <br>
 <br>
 <br>
-    <form>
     <table id="users">
     </table>
-    </form>
 </body>
 </html>

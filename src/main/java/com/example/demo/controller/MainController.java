@@ -2,6 +2,7 @@ package com.example.demo.controller;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -10,12 +11,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.demo.model.Account;
 import com.example.demo.model.UserInfo;
 import com.example.demo.model.information;
 import com.example.demo.model.link;
 import com.example.demo.model.messageBoard;
+import com.example.demo.repository.AccountRepository;
 import com.example.demo.repository.messageBoardRepository;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
@@ -26,6 +29,9 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 public class MainController {
     @Autowired
     messageBoardRepository mbr;
+
+    @Autowired
+    AccountRepository accountr;
 
     void setAccountInfo(User user, Account account) {
         ObjectMapper mapper = new ObjectMapper();
@@ -119,8 +125,23 @@ public class MainController {
     @GetMapping("/adminuser")
     public String adminUser(@AuthenticationPrincipal User user, @ModelAttribute Account account) {
         setAccountInfo(user, account);
-
         return ("adminuser");
     }
 
+    @GetMapping("/modifyuser")
+    public String modifyUser(
+            @AuthenticationPrincipal User user,
+            @ModelAttribute Account account,
+            @ModelAttribute(name="modAccount") Account modAccount,
+            @RequestParam(name="id") int id) {
+        setAccountInfo(user, account);
+        Optional<Account> tmpAccount = accountr.findById(id);
+        System.out.println(tmpAccount.toString());
+        // TODO これどうにかならんか？
+        modAccount.setUserName(tmpAccount.get().getUserName());
+        modAccount.setNickName(tmpAccount.get().getNickName());
+        modAccount.setAge(tmpAccount.get().getAge());
+        modAccount.setPrivileges(tmpAccount.get().getPrivileges());
+        return ("modifyuser");
+    }
 }
