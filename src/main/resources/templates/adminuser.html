@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://tymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>ユーザー管理</title>
+</head>
+<body onload="getUsers();">
+    <script>
+         function getUsers() {
+            var header = document.getElementById("csrf").name;
+            var token = document.getElementById("csrf").value;
+            const url = "/getUsers";
+            const req = new XMLHttpRequest();
+            req.withCredentials = true;
+            req.open("GET", url);
+
+            req.onreadystatechange = function () {
+                if (req.readyState == XMLHttpRequest.DONE) {
+                    let status = req.status;
+                    if (status === 0 || (status >= 200 && status < 400)) {
+                        refreshUsers(req.responseText);
+                    } else {
+                        // エラー処理
+                        alert("HTTP-ERROR: " + status);
+                    }
+                }
+            }
+            req.setRequestHeader(header, token);
+            req.setRequestHeader('Content-type', 'application/json; charset=utf-8');
+            req.send();
+        }
+
+        function refreshUsers(tjs) {
+            var js = JSON.parse(tjs);
+            var dt = document.getElementById("users");
+            dt.innerHTML = "";
+            js.forEach(element => {
+                tb.innerHTML += 
+                '<div>' + element.userName + '</div><br>';
+            });
+        }
+    </script>
+    <div th:insert="~{navbar}">  </div>
+    <form th:object="${account}" >
+        ユーザー名：[[${account.userName}]]<br>
+        ニックネーム：[[${account.nickName}]]<br>
+        メール：[[${account.email}]]<br>
+        年齢：[[${account.age}]]<br>
+    </form>
+
+    <div id="users">
+
+    </div>
+
+</body>
+</html>

@@ -116,4 +116,11 @@ public class MainController {
         return ("linkEdit");
     }
 
+    @GetMapping("/adminuser")
+    public String adminUser(@AuthenticationPrincipal User user, @ModelAttribute Account account) {
+        setAccountInfo(user, account);
+
+        return ("adminuser");
+    }
+
 }

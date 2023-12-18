@@ -30,6 +30,9 @@ public class Account {
     @Column(columnDefinition="VARCHAR(128) default ''")
     private String nickName;
 
+    @Column(columnDefinition="INT default 0")
+    private int age;
+
     @Column(columnDefinition = "VARCHAR(8) default '00000001'")
     private String privileges;
 
