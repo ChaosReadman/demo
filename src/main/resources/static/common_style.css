@@ -1,16 +1,19 @@
-.topChat, .topNews{
+/* .topChat, .topNews{
+  font-family: Impact, sans-serif;
+  width: 400px;
+  height: 200px;
+} */
+
+.topNews {
     font-family: Impact, sans-serif;
     width: 400px;
     height: 200px;
-}
-
-.topNews {
     background-color: hsl(199, 70%, 59%);
 }
 
-.topChat {
+/* .topChat {
     background-color: aqua;
-}
+} */
 
 .linkList {
   background-color: lightpink;
@@ -131,18 +134,22 @@
     background-color: dodgerblue;
 }
 
-form.msgform {
+.msgform {
     background-color: #eee;
     height: 400px;
     width: 100%;
     overflow-y:auto;
 }
 
-form.msgform .msgRow{ 
+div.msgform {
+  width: 400px;
+}
+
+.msgform .msgRow{ 
     border-top: solid #ccc 1px; 
 }
 
-form.msgform .msgRow div {
+.msgform .msgRow div {
   padding: 10px;
 }
 
