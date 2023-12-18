@@ -37,9 +37,12 @@
             dt.innerHTML = "";
             js.forEach(element => {
                 dt.innerHTML += 
-                '<span name="id"> ' + element.id + '</span>' +
-                '<span name="userName">' + element.userName + ' </span>' +
-                '<span name="nickName">' + element.nickName + ' </span><br>';
+                '<tr>' + 
+                '<td name="id"> ' + element.id + '</td>' +
+                '<td name="userName">' + element.userName + ' </td>' +
+                '<td name="nickName">' + element.nickName + ' </td>' +
+                '<td><button action="modify();">修正</button></td>' + 
+                '<tr>';
             });
         }
     </script>
@@ -49,9 +52,9 @@
 <br>
 <br>
 
-    <div id="users">
+    <table id="users">
 
-    </div>
+    </table>
 
 </body>
 </html>
