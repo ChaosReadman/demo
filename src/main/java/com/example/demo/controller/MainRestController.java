@@ -108,4 +108,11 @@ public class MainRestController {
         }
         return ResponseEntity.badRequest().build();
     }
+
+    @PostMapping("/deletelink")
+    public ResponseEntity<?> deletelink(@RequestBody link lnk) {
+        linkr.delete(lnk);
+        return ResponseEntity.ok().build();
+    }
+    
 }
