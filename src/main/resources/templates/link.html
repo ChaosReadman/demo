@@ -48,9 +48,10 @@
     </script>
     <div th:insert="~{navbar}" />
     <input id="csrf" type="hidden" th:name="${_csrf.headerName}" th:value="${_csrf.token}" />
+    
+    <div id="pageTitle">外部リンク一覧</div>
 
     <div class="linkList">
-        <p><b>外部リンク一覧</b></p>
         <div class="linkform">
             <table id="links">
             </table>

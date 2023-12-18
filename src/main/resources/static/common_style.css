@@ -13,47 +13,71 @@
 }
 
 .linkList {
-  background-color: lightpink;
-  width: 400px;
-  height: 200px;
+    background-color: lightpink;
+    width: 400px;
+    height: 200px;
 }
 
 .navbar {
     background-color: dodgerblue;
-    margin: 5px;
-    position: relative;
-    height: 35px;
+    top: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    position: fixed;
+    height: 60px;
+    z-index: 90px;
 }
 
-.navButtons{
-    background-color: rgb(125, 169, 230);
-    color: white;
+.navButtons {
     position: absolute;
-    height: 35px;
+    height: 60px;
     width: auto;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
 }
 
-.navButtons button{
-    background-color: rgb(125, 169, 230);
+.navButtons button {
+    background-color: dodgerblue;
     color: white;
     justify-content: center;
-    height: 30px;
-    width: auto;
+    border: 0;
+    height: 55px;
+    width: 100px;
     position: relative;
     margin: 0 auto;
+    cursor: pointer;
+}
+
+.title {
+    color: white;
+    position: absolute;
+    width: 50%;
+}
+
+.titleName {
+    display: block;
+    margin: 5px 0 0 15px;
+}
+
+.clubName {
+    display: block;
+    font-size: 12;
+    margin: 0 0 0 30px;
 }
 
 .userInfo {
-    background-color: dodgerblue;
     color: white;
-    display: flex;
-    align-items: right;
-    top: 5px;
-    justify-content: right;
-    margin: 5px;
+    position: absolute;
+    right: 0;
+    margin: 5px 70px 0 0;
+}
+
+.loginUser{
+    display: block;
+    margin-right: 0;
+    margin-left: auto;
 }
 
 .accountMenu_box {
@@ -65,63 +89,69 @@
     width: 60px;
     justify-content: center;
     align-items: center;
-    z-index: 90;
-    background-color: dodgerblue;
 }
 
 .accountMenu_box span,
 .accountMenu_box span:before,
 .accountMenu_box span:after {
-  content: "";
-  display: block;
-  height: 3px;
-  width: 25px;
-  border-radius: 3px;
-  background: #ffffff;
-  position: absolute;
-}
-.accountMenu_box span:before {
-  bottom: 8px;
-}
-.accountMenu_box span:after {
-  top: 8px;
-}
-#accountMenu_check {
-  display: none;
-}
-#accountMenu_check:checked ~ .accountMenu_box span {
-  background: rgba(255, 255, 255, 0);
-}
-#accountMenu_check:checked ~ .accountMenu_box span::before {
-  bottom: 0;
-  transform: rotate(45deg);
-}
-#accountMenu_check:checked ~ .accountMenu_box span::after {
-  top: 0;
-  transform: rotate(-45deg);
-}
-#accountMenu_check:checked ~ .accountMenu_content {
-    left: 70%;
-}
-.accountMenu_content {
-  width: 30%;
-  height: 100%;
-  position: fixed;
-  top: 60px;    
-  left: 100%;
-  z-index: 80;
-  background-color: dodgerblue;
-  transition: all 0.5s;
-}
-.accountMenu_list {
-  padding: 0 10px 0;
-}
-.accountMenu_item {
-  border-bottom: solid 1px #ffffff;
-  list-style: none;
+    content: "";
+    display: block;
+    height: 3px;
+    width: 25px;
+    border-radius: 3px;
+    background: #ffffff;
+    position: absolute;
 }
 
-.accountMenu_botton {
+.accountMenu_box span:before {
+    bottom: 8px;
+}
+
+.accountMenu_box span:after {
+    top: 8px;
+}
+
+#accountMenu_check {
+    display: none;
+}
+
+#accountMenu_check:checked~.accountMenu_box span {
+    background: rgba(255, 255, 255, 0);
+}
+
+#accountMenu_check:checked~.accountMenu_box span::before {
+    bottom: 0;
+    transform: rotate(45deg);
+}
+
+#accountMenu_check:checked~.accountMenu_box span::after {
+    top: 0;
+    transform: rotate(-45deg);
+}
+
+#accountMenu_check:checked~.accountMenu_content {
+    left: calc(100% - 300px);
+}
+
+.accountMenu_content {
+    width: 300px;
+    position: fixed;
+    top: 60px;
+    left: 100%;
+    background-color: dodgerblue;
+    transition: all 0.5s;
+}
+
+.accountMenu_list {
+    padding: 0 10px 0;
+}
+
+.accountMenu_item {
+    border-bottom: solid 1px #ffffff;
+    list-style: none;
+}
+
+.accountMenu button {
     border: 0;
     width: 100%;
     font-size: 15px;
@@ -129,6 +159,7 @@
     padding: 9px 15px 10px 0;
     color: #ffffff;
     background-color: dodgerblue;
+    cursor: pointer;
 }
 
 form.msgform {
