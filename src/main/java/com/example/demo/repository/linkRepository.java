@@ -15,4 +15,9 @@ public interface linkRepository extends JpaRepository<link, Integer> {
     @Transactional
     @Query(value="insert into link (title, url) values(:#{#lnk.title}, :#{#lnk.url})", nativeQuery = true)
     public abstract void insert(@Param("lnk") link lnk); 
+
+    @Modifying
+    @Transactional
+    @Query(value="DELETE FROM link WHERE id = :#{#lnk.id}", nativeQuery = true)
+    public abstract void delete(@Param("lnk") link lnk);
 }

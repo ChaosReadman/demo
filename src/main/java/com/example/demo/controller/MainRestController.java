@@ -114,7 +114,14 @@ public class MainRestController {
         return ResponseEntity.badRequest().build();
     }
 
-    @GetMapping("/getUsers")
+    @PostMapping("/deletelink")
+    public ResponseEntity<?> deletelink(@RequestBody link lnk) {
+        linkr.delete(lnk);
+        return ResponseEntity.ok().build();
+    }
+    
+
+        @GetMapping("/getUsers")
     public ResponseEntity<?> getUsers() {
         ArrayList<Account> mblTmp = (ArrayList<Account>) accountr.findAll();
         ObjectMapper mapper = new ObjectMapper();
