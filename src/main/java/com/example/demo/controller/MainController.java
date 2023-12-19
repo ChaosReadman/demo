@@ -7,7 +7,10 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.User;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -32,6 +35,9 @@ public class MainController {
 
     @Autowired
     AccountRepository accountr;
+
+    @Autowired
+    PasswordEncoder encoder;
 
     void setAccountInfo(User user, Account account) {
         ObjectMapper mapper = new ObjectMapper();
@@ -132,16 +138,30 @@ public class MainController {
     public String modifyUser(
             @AuthenticationPrincipal User user,
             @ModelAttribute Account account,
-            @ModelAttribute(name="modAccount") Account modAccount,
-            @RequestParam(name="id") int id) {
+            @ModelAttribute(name = "modAccount") Account modAccount,
+            @RequestParam(name = "id") int id) {
         setAccountInfo(user, account);
         Optional<Account> tmpAccount = accountr.findById(id);
         System.out.println(tmpAccount.toString());
-        // TODO これどうにかならんか？
+        
         modAccount.setUserName(tmpAccount.get().getUserName());
         modAccount.setNickName(tmpAccount.get().getNickName());
+        modAccount.setPassword("");
         modAccount.setAge(tmpAccount.get().getAge());
         modAccount.setPrivileges(tmpAccount.get().getPrivileges());
         return ("modifyuser");
     }
+
+    @PostMapping("updateuser")
+    public String updateuser(@AuthenticationPrincipal User user, @ModelAttribute Account account,
+            @ModelAttribute(name = "modAccount") @Validated Account modAccount,BindingResult bind) {
+        setAccountInfo(user, account);
+        if (bind.hasErrors()){
+            return "modifyuser";
+        }
+        modAccount.setPassword(encoder.encode(modAccount.getPassword()));
+        System.out.println(modAccount.toString());
+        return "modifyuser";
+    }
+
 }

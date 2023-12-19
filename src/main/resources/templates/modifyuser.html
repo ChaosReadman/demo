@@ -1,16 +1,71 @@
 <!DOCTYPE html>
-<html xmlns:th="http://tymeleaf.org">
+<html xmlns:th="http://tymeleaf.org" lang="ja">
 
 <head>
     <meta charset="UTF-8">
     <title>ユーザー修正</title>
 </head>
-<body></body>
+
+<body>
+    <br>
+    <br>
+    <br>
     <script>
 
     </script>
-    <form th:object="${modAccount}">
-        userName：[[${modAccount.userName}]]<br>
+        <div th:insert="~{navbar}"> </div>
+    <form th:action="@{/updateuser}" method="POST" th:object="${modAccount}">
+        <input name="id" th:value="*{id}">
+        <table>
+            <tbody>
+                <tr>
+                    <td>
+                        userName
+                    </td>
+                    <td>
+                        <input name="userName" th:value="*{userName}">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        nickName
+                    </td>
+                    <td>
+                        <input name="nickName" th:value="*{nickName}">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        password
+                    </td>
+                    <td>
+                        <input name="password" th:value="*{password}">
+                        <span class="text-danger"
+                              th:if="${#fields.hasErrors('password')}"
+                              th:errors="*{password}">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        age
+                    </td>
+                    <td>
+                        <input name="age" th:value="*{age}">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Privileges
+                    </td>
+                    <td>
+                        <input name="privileges" th:value="${modAccount.Privileges}">
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <button type="submit">登録</button>
+
     </form>
 
 </body>
