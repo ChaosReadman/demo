@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://tymeleaf.org">
+<html xmlns:th="http://tymeleaf.org" lang="ja">
 
 <head>
     <meta charset="UTF-8" />
@@ -34,9 +34,7 @@
                         refreshLink();
                     } else {
                         // エラー処理
-                        var res = JSON.parse(req.response);
-                        
-                        alert("HTTP-ERROR: " + status + "\r\n" + "Error Message: " + res[0].defaultMessage);
+                        alert("HTTP-ERROR: " + status);
                         return;
                     }
                 }
@@ -62,6 +60,7 @@
                     } else {
                         // エラー処理
                         alert("HTTP-ERROR: " + status);
+                        return;
                     }
                 }
             };
@@ -95,6 +94,7 @@
                     } else {
                         // エラー処理
                         alert("HTTP-ERROR: " + status);
+                        return;
                     }
                 }
             };
