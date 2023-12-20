@@ -16,6 +16,6 @@ public interface AccountRepository extends JpaRepository<Account, Integer> {
 
     @Modifying
     @Transactional
-    @Query(value="update account a set a.user_name=:#{#ac.userName}, a.nick_name=:#{#ac.nickName}, a.password=:#{#ac.password}, a.privileges=:#{#ac.privileges}, a.org_password=:#{#ac.orgPassword}, a.last_update_user=:#{#ac.lastUpdateUser}, a.last_update_date=CURRENT_TIMESTAMP where a.id=:#{#ac.id}", nativeQuery = true)
+    @Query(value="update account a set a.user_name=:#{#ac.userName}, a.nick_name=:#{#ac.nickName}, a.password=:#{#ac.password}, a.privileges=:#{#ac.privileges}, a.org_password=:#{#ac.orgPassword}, a.age=:#{#ac.age}, a.last_update_user=:#{#ac.lastUpdateUser}, a.last_update_date=CURRENT_TIMESTAMP where a.id=:#{#ac.id}", nativeQuery = true)
     public abstract void update(@Param("ac") Account ac);
 }
