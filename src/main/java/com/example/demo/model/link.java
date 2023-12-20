@@ -20,7 +20,7 @@ public class link {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column
-    private int id;
+    private Integer id;
 
     @Column(columnDefinition="VARCHAR(128) default ''")
     @NotBlank(message="タイトルが未入力です。")

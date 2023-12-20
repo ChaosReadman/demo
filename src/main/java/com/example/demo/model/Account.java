@@ -23,7 +23,7 @@ public class Account {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column
-    private int id;
+    private Integer id;
 
     @Column(columnDefinition="VARCHAR(128) default ''")
     @NotBlank
@@ -39,7 +39,7 @@ public class Account {
 
     @Column(columnDefinition="INT default 0")
     @NotNull
-    private int age;
+    private Integer age;
 
     @Column(columnDefinition = "VARCHAR(8) default '00000001'")
     @NotBlank

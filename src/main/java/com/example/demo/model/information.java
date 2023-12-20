@@ -17,7 +17,7 @@ public class information {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column
-    private int id;
+    private Integer id;
 
     @Column(columnDefinition="VARCHAR(4096) default ''")
     private String message;

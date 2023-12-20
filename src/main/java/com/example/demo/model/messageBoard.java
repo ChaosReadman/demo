@@ -17,7 +17,7 @@ public class messageBoard {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column
-    private int id;
+    private Integer id;
 
     @Column(columnDefinition="VARCHAR(128) default ''")
     private String userName;

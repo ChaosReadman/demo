@@ -3,6 +3,8 @@
 
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link th:href="@{/webjars/bootstrap/css/bootstrap.min.css}" rel="stylesheet">
     <title>ユーザー修正</title>
 </head>
 
@@ -13,7 +15,7 @@
     <script>
 
     </script>
-        <div th:insert="~{navbar}"> </div>
+    <div th:insert="~{navbar}"> </div>
     <form th:action="@{/updateuser}" method="POST" th:object="${modAccount}">
         <input name="id" th:value="*{id}">
         <table>
@@ -23,7 +25,9 @@
                         userName
                     </td>
                     <td>
-                        <input name="userName" th:value="*{userName}">
+                        <input type="text" name="userName" class="form-control" th:errorclass="is-invalid"
+                            th:field="*{userName}">
+                        <div class="invalid-feedback" th:errors="*{userName}">
                     </td>
                 </tr>
                 <tr>
@@ -31,7 +35,9 @@
                         nickName
                     </td>
                     <td>
-                        <input name="nickName" th:value="*{nickName}">
+                        <input type="text" name="nickName" class="form-control" th:errorclass="is-invalid"
+                            th:field="*{nickName}">
+                        <div class="invalid-feedback" th:errors="*{nickName}">
                     </td>
                 </tr>
                 <tr>
@@ -39,10 +45,9 @@
                         password
                     </td>
                     <td>
-                        <input name="password" th:value="*{password}">
-                        <span class="text-danger"
-                              th:if="${#fields.hasErrors('password')}"
-                              th:errors="*{password}">
+                        <input type="text" name="password" class="form-control" th:errorclass="is-invalid"
+                            th:field="*{password}">
+                        <div class="invalid-feedback" th:errors="*{password}">
                     </td>
                 </tr>
                 <tr>
@@ -50,7 +55,8 @@
                         age
                     </td>
                     <td>
-                        <input name="age" th:value="*{age}">
+                        <input type="text" name="age" class="form-control" th:errorclass="is-invalid" th:field="*{age}">
+                        <div class="invalid-feedback" th:errors="*{age}">
                     </td>
                 </tr>
                 <tr>
@@ -58,7 +64,9 @@
                         Privileges
                     </td>
                     <td>
-                        <input name="privileges" th:value="${modAccount.Privileges}">
+                        <input type="text" name="privileges" class="form-control" th:errorclass="is-invalid"
+                            th:field="*{privileges}">
+                        <div class="invalid-feedback" th:errors="*{privileges}">
                     </td>
                 </tr>
             </tbody>

@@ -12,7 +12,7 @@ import lombok.Setter;
 public class UserInfo {
     @Id
     @GeneratedValue
-    private Long id;
+    private Integer id;
 
     private String firstName;
     private String lastName;
