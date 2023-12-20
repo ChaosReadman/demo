@@ -154,3 +154,22 @@ pwd:fuga
     "java.compile.nullAnalysis.mode": "automatic"
 }
 </pre>
+
++ gradleフォルダを消してしまった場合  
+　以下手順で、gradleフォルダを復帰させる
+  + gradleのバージョンを確認(8.5であること)
+    <pre>
+    gradle --version
+    </pre>
+
+  + demoフォルダ直下で以下を実行
+    <pre>
+    gradle wrap
+    </pre>
+
+  + gradlewでリビルド
+    <pre>
+    ./gradlew clean
+    ./gradlew build
+    </pre>
+  
