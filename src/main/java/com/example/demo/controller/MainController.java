@@ -142,7 +142,6 @@ public class MainController {
             @RequestParam(name = "id") int id) {
         setAccountInfo(user, account);
         Optional<Account> tmpAccount = accountr.findById(id);
-        System.out.println(tmpAccount.toString());
         
         modAccount.setUserName(tmpAccount.get().getUserName());
         modAccount.setNickName(tmpAccount.get().getNickName());
@@ -159,9 +158,16 @@ public class MainController {
         if (bind.hasErrors()){
             return "modifyuser";
         }
-        modAccount.setPassword(encoder.encode(modAccount.getPassword()));
-        System.out.println(modAccount.toString());
-        return "modifyuser";
+        modAccount.setLastUpdateUser(account.getUserName());
+        modAccount.setPassword(encoder.encode(modAccount.getOrgPassword()));
+        accountr.update(modAccount);
+
+        modAccount.setOrgPassword("");
+        // もし自分と同じIDなら一度ログアウトが必要（なのでlogin画面に遷移）
+        if (account.getId()==modAccount.getId()){
+            return "login";
+        }
+        return "adminuser";
     }
 
 }
