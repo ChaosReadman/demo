@@ -57,6 +57,7 @@ vi ~/.bash_profile
 以下を追加
 <pre>
 export GRADLE_HOME=/opt/gradle/gradle-8.5
+export GRADLE_USER_HOME=/opt/gradle/gradle-8.5
 export PATH=${GRADLE_HOME}/bin:${PATH}
 </pre>
 設定を反映
