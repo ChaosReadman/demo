@@ -121,3 +121,36 @@ pwd:fuga
       + [WSL](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-wsl)
       + [Remote Development](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.vscode-remote-extensionpack)
    
++ launch.json  
+  .vscode/launch.jsonの中身を一応置いておきます
+<pre>
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Current File",
+            "request": "launch",
+            "mainClass": "${file}"
+        },
+        {
+            "type": "java",
+            "name": "DemoApplication",
+            "request": "launch",
+            "mainClass": "com.example.demo.DemoApplication",
+            "projectName": "demo"
+        }
+    ]
+}
+</pre>
+
++ settings.json  
+  .vscode/settings.jsonの中身を一応置いておきます
+<pre>
+{
+    "java.compile.nullAnalysis.mode": "automatic"
+}
+</pre>
