@@ -23,11 +23,11 @@ public class link {
     private int id;
 
     @Column(columnDefinition="VARCHAR(128) default ''")
-    @NotBlank
+    @NotBlank(message="タイトルが未入力です。")
     private String title;
 
     @Column(columnDefinition="VARCHAR(1024) default ''")
-    @URL
+    @URL(message="無効なURLです。")
     private String url;
 
     @Column(columnDefinition="VARCHAR(128) default 'SYSTEM'")
