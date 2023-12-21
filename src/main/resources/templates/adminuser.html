@@ -5,9 +5,10 @@
     <meta charset="UTF-8">
     <title>ユーザー管理</title>
 </head>
+
 <body onload="getUsers();">
     <script>
-         function getUsers() {
+        function getUsers() {
             var header = document.getElementById("csrf").name;
             var token = document.getElementById("csrf").value;
             const url = "/getusers";
@@ -36,29 +37,39 @@
             var dt = document.getElementById("users");
             dt.innerHTML = "";
             js.forEach(element => {
-                dt.innerHTML += 
-                '<tr>' + 
-                '<td name="id"> ' + element.id + '</td>' +
-                '<td name="userName">' + element.userName + ' </td>' +
-                '<td name="nickName">' + element.nickName + ' </td>' +
-                '<td><form action="/modifyuser">'+
+                dt.innerHTML +=
+                    '<tr>' +
+                    '<td name="id"> ' + element.id + '</td>' +
+                    '<td name="userName">' + element.userName + ' </td>' +
+                    '<td name="nickName">' + element.nickName + ' </td>' +
+                    '<td><form action="/modifyuser">' +
                     '<input name="id" value=' + element.id + '>' +
                     '<button type="submit" >修正</button>' +
-                '</form></td>' + 
-                '<tr>';
+                    '</form></td>' +
+                    '<td><form action="/deleteuser">' +
+                    '<input name="id" value=' + element.id + '>' +
+                    '<button type="submit" >削除</button>' +
+                    '</form></td>' +
+                    '<tr>';
             });
         }
     </script>
-    <div th:insert="~{navbar}">  </div>
+    <div th:insert="~{navbar}"> </div>
     <input id="csrf" type="hidden" th:name="${_csrf.headerName}" th:value="${_csrf.token}" />
-<br>
-<br>
-<br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <div  th:if="${#fields.hasErrors('${account.id}')}"  th:errors="${account.id}"></div>
+    <br>
     <form action="/modifyuser">
-        <input name="id" value="-1">
+        <input name="id" th:value="-1">
         <button type="submit">追加</button>
     </form>
     <table id="users">
     </table>
 </body>
+
 </html>
