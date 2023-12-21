@@ -6,118 +6,7 @@
     <title>外部リンク編集</title>
 </head>
 
-<body onload="init()">
-    <script type="text/javascript">
-        function init() {
-            refreshLink();
-        }
-
-        function postLink() {
-            var header = document.getElementById("csrf").name;
-            var token = document.getElementById("csrf").value;
-            const url = "/insertlink";
-            let data = JSON.stringify({
-                title: document.getElementById("title").value,
-                url: document.getElementById("url").value
-            });
-
-            const req = new XMLHttpRequest();
-            req.withCredentials = true;
-            req.open("POST", url);
-
-            req.onreadystatechange = function () {
-                if (req.readyState == XMLHttpRequest.DONE) {
-                    let status = req.status;
-                    if (status === 0 || (status >= 200 && status < 400)) {
-                        document.getElementById("title").value = "";
-                        document.getElementById("url").value = "";
-                        refreshLink();
-                    } else {
-                        // エラー処理
-                        alert("HTTP-ERROR: " + status);
-                        return;
-                    }
-                }
-            };
-            req.setRequestHeader(header, token);
-            req.setRequestHeader('Content-type', 'application/json; charset=utf-8');
-            req.send(data);
-        }
-
-        function refreshLink() {
-            var header = document.getElementById("csrf").name;
-            var token = document.getElementById("csrf").value;
-            const url = "/getlink";
-            const req = new XMLHttpRequest();
-            req.withCredentials = true;
-            req.open("GET", url);
-
-            req.onreadystatechange = function () {
-                if (req.readyState == XMLHttpRequest.DONE) {
-                    let status = req.status;
-                    if (status === 0 || (status >= 200 && status < 400)) {
-                        refreshLinkTbl(req.responseText);
-                    } else {
-                        // エラー処理
-                        alert("HTTP-ERROR: " + status);
-                        return;
-                    }
-                }
-            };
-            req.setRequestHeader(header, token);
-            req.setRequestHeader('Content-type', 'application/json; charset=utf-8');
-            req.send();
-        }
-
-        function deleteLink(id) {
-            if(!window.confirm("削除してもよろしいですか？")){
-                return;
-            }
-            var header = document.getElementById("csrf").name;
-            var token = document.getElementById("csrf").value;
-            const url = "/deletelink";
-            let data = JSON.stringify({
-                id: id
-            });
-            const req = new XMLHttpRequest();
-            req.withCredentials = true;
-            req.open("POST", url);
-            
-            req.onreadystatechange = function () {
-                if (req.readyState == XMLHttpRequest.DONE) {
-                    let status = req.status;
-                    if (status === 0 || (status >= 200 && status < 400)) {
-                        alert("削除しました。");
-                        document.getElementById("title").value = "";
-                        document.getElementById("url").value = "";
-                        refreshLink();
-                    } else {
-                        // エラー処理
-                        alert("HTTP-ERROR: " + status);
-                        return;
-                    }
-                }
-            };
-            req.setRequestHeader(header, token);
-            req.setRequestHeader('Content-type', 'application/json; charset=utf-8');
-            req.send(data);
-        }
-
-        function refreshLinkTbl(tjs) {
-            var js = JSON.parse(tjs);
-            var tr;
-            var td;
-            var tb = document.getElementById("links");
-            tb.innerHTML = "";
-            js.forEach((element) => {
-                tb.innerHTML +=
-                    "<tr>" +
-                    "<td><a href='" + element.url + "' target='_blank' rel='noopener noreferrer' >" + element.title + "</a></td>" +
-                    "<td><a href='javascript:deleteLink(" + element.id + ");' >削除</a></td>" +
-                    "</tr>";
-            });
-        }
-    </script>
+<body>
     <div th:insert="~{navbar}"></div>
 
     <div id="pageTitle">リンク編集</div>
@@ -129,6 +18,58 @@
         <button id="send" onclick="postLink();">送信</button>
     </div>
     <table id="links"></table>
+
+    <script th:src="@{/js/refresh.js}"></script>
+    <script type="text/javascript">
+        refreshLinkTbl();
+
+        //サーバーに追加するリンク情報をpostする関数
+        function postLink() {
+            let data = JSON.stringify({
+                title: document.getElementById("title").value,
+                url: document.getElementById("url").value
+            });
+
+            postRequest("/insertlink", data, function(){
+                document.getElementById("title").value = "";
+                document.getElementById("url").value = "";
+                refreshLinkTbl();
+            })
+        }
+
+        function deleteLink(id) {
+            if(!window.confirm("削除してもよろしいですか？")){
+                return;
+            }
+
+            let data = JSON.stringify({
+                id: id
+            });
+
+            postRequest("/deletelink", data, function(){
+                alert("削除しました。");
+                        document.getElementById("title").value = "";
+                        document.getElementById("url").value = "";
+                        refreshLinkTbl();
+            });
+        }
+
+        //リンク情報の表示を更新する関数
+        function refreshLinkTbl(tjs) {
+            getRequest("/getlink", function(response){
+                var js = JSON.parse(response);
+                var tb = document.getElementById("links");
+                tb.innerHTML = "";
+                js.forEach((element) => {
+                    tb.innerHTML +=
+                        "<tr>" +
+                        "<td><a href='" + element.url + "' target='_blank' rel='noopener noreferrer' >" + element.title + "</a></td>" +
+                        "<td><a href='javascript:deleteLink(" + element.id + ");' >削除</a></td>" +
+                        "</tr>";
+                });
+            })
+        }
+    </script>
 </body>
 
 </html>
