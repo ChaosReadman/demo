@@ -11,6 +11,7 @@ import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -49,6 +50,7 @@ public class Account {
     private Integer age;
 
     @Column(columnDefinition = "VARCHAR(8) default '00000001'")
+    @Size(min=8, max=8)
     @NotBlank
     private String privileges;
 
