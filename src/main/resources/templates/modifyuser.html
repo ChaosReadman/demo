@@ -8,13 +8,11 @@
 </head>
 
 <body>
+    <script></script>
+    <div th:insert="~{navbar}"></div>
     <br>
     <br>
     <br>
-    <script>
-
-    </script>
-    <div th:insert="~{navbar}"> </div>
     <form th:action="@{/updateuser}" method="POST" th:object="${modAccount}">
         <input name="id" th:value="*{id}">
         <table>

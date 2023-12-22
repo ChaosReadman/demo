@@ -70,7 +70,7 @@
         }
 
         function deleteLink(id) {
-            if(!window.confirm("削除してもよろしいですか？")){
+            if (!window.confirm("削除してもよろしいですか？")) {
                 return;
             }
             var header = document.getElementById("csrf").name;
@@ -82,7 +82,7 @@
             const req = new XMLHttpRequest();
             req.withCredentials = true;
             req.open("POST", url);
-            
+
             req.onreadystatechange = function () {
                 if (req.readyState == XMLHttpRequest.DONE) {
                     let status = req.status;
@@ -117,18 +117,49 @@
                     "</tr>";
             });
         }
+
+        function inputReset() {
+            document.getElementById("title").value = "";
+            document.getElementById("url").value = "";
+        }
     </script>
-    <div th:insert="~{navbar}"></div>
 
-    <div id="pageTitle">リンク編集</div>
-
-    <div id="msg">
-        <input id="csrf" type="hidden" th:name="${_csrf.headerName}" th:value="${_csrf.token}" />
-        <input id="title" type="text" th:field="${lnk.title}" />
-        <input id="url" type="text" th:field="${lnk.url}" />
-        <button id="send" onclick="postLink();">送信</button>
+    <div class="row">
+        <div th:insert="~{navbar}"></div>
     </div>
-    <table id="links"></table>
+
+    <div class="container">
+        <div class="row">
+            <div id="pageTitle">リンク編集</div>
+        </div>
+
+        <div class="row">
+            <div class="col"></div>
+            <div id="msg" class="col-6">
+                <input id="csrf" type="hidden" th:name="${_csrf.headerName}" th:value="${_csrf.token}" />
+                <div class="input-group mb-3">
+                    <span class="input-group-text">外部リンク名</span>
+                    <input id="title" type="text" class="form-control" placeholder="title" th:errorclass="is-invalid"
+                        th:field="${lnk.title}" />
+                </div>
+                <div class="input-group mb-3">
+                    <span class="input-group-text">外部リンクURL</span>
+                    <input id="url" type="text" class="form-control" placeholder="URL" th:errorclass="is-invalid"
+                        th:field="${lnk.url}" />
+                </div>
+                <div class="button-set">
+                    <button type="button" id="send" class="btn btn-secondary" onclick="inputReset();">リセット</button>
+                    <button type="button" id="send" class="btn btn-primary" onclick="postLink();">送信</button>
+                </div>
+            </div>
+            <div class="col"></div>
+        </div>
+
+        <div class="row">
+            <table id="links" class="col"></table>
+        </div>
+
+    </div>
 </body>
 
 </html>
