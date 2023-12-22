@@ -23,38 +23,28 @@
         </div>
 
     <script th:src="@{/js/refreshMsg.js}"></script>
+    <script th:src="@{/js/http.js}"></script>
     <script type="text/javascript">
+        function init() {
+            // お知らせを更新
+            refreshInfo();
+            // 定期的に掲示板を更新
+            refreshMsg();
+            setInterval(function () {
+                refreshMsg();
+            }, 5000);
+        }
+
         function refreshInfo() {
-            var header = document.getElementById("csrf").name;
-            var token = document.getElementById("csrf").value;
-            const url = "/getinfo";
-            const req = new XMLHttpRequest();
-            req.withCredentials = true;
-            req.open("GET", url);
-
-            req.onreadystatechange = function () {
-                if (req.readyState == XMLHttpRequest.DONE) {
-                    let status = req.status;
-                    if (status === 0 || (status >= 200 && status < 400)) {
-                        refreshInfoTbl(req.responseText);
-                        var  form = document.getElementsByClassName("infoform");
-
-                        form[0].scrollTo(0, msgs.scrollHeight);
-                    } else {
-                        // エラー処理
-                        alert("HTTP-ERROR: " + status);
-                    }
-                }
-            }
-            req.setRequestHeader(header, token);
-            req.setRequestHeader('Content-type', 'application/json; charset=utf-8');
-            req.send();
+            getRequest("/getinfo", function(response){
+                refreshInfoTbl(response);
+                var  form = document.getElementsByClassName("infoform");
+                form[0].scrollTo(0, msgs.scrollHeight);
+            });
         }
 
         function refreshInfoTbl(tjs) {
             var js = JSON.parse(tjs);
-            var tr;
-            var td;
             var tb = document.getElementById("infos");
             tb.innerHTML = "";
             js.forEach(element => {

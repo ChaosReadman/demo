@@ -1,13 +1,3 @@
-function init() {
-    // お知らせを更新
-    refreshInfo();
-    // 定期的に掲示板を更新
-    refreshMsg();
-    setInterval(function () {
-        refreshMsg();
-    }, 5000);
-}
-
 //掲示板の投稿内容の表示を更新
 function refreshTbl(tjs) {
     var js = JSON.parse(tjs);

@@ -23,43 +23,29 @@
         <button id="send" onclick="postMsg();">送信</button>
     </div>
 
+
+    <script th:src="@{/js/http.js}"></script>
     <script th:src="@{/js/refreshMsg.js}"></script>
     <script type="text/javascript">
         function init() {
+            // 定期的に掲示板を更新
             refreshMsg();
             setInterval(function () {
                 refreshMsg();
             }, 5000);
         }
+            
 
         function postMsg() {
-            var header = document.getElementById("csrf").name;
-            var token = document.getElementById("csrf").value;
-            const url = "/insertmsg";
             let data = JSON.stringify({
                 userName: document.getElementById("user").value,
                 message: document.getElementById("message").value,
             });
 
-            const req = new XMLHttpRequest();
-            req.withCredentials = true;
-            req.open("POST", url);
-
-            req.onreadystatechange = function () {
-                if (req.readyState == XMLHttpRequest.DONE) {
-                    let status = req.status;
-                    if (status === 0 || (status >= 200 && status < 400)) {
-                        document.getElementById("message").value = "";
-                        refreshMsg();
-                    } else {
-                        // エラー処理
-                        alert("HTTP-ERROR: " + status);
-                    }
-                }
-            }
-            req.setRequestHeader(header, token);
-            req.setRequestHeader('Content-type', 'application/json; charset=utf-8');
-            req.send(data);
+            postRequest("/insertmsg", data, function(){
+                document.getElementById("message").value = "";
+                refreshMsg();
+            })
         }
     </script>
 </body>
