@@ -56,13 +56,7 @@
     </script>
     <div th:insert="~{navbar}"> </div>
     <input id="csrf" type="hidden" th:name="${_csrf.headerName}" th:value="${_csrf.token}" />
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <div  th:if="${#fields.hasErrors('${account.id}')}"  th:errors="${account.id}"></div>
+    <div th:if="${#fields.hasErrors('${account.id}')}"  th:errors="${account.id}"></div>
     <br>
     <form action="/modifyuser">
         <input name="id" th:value="-1">
