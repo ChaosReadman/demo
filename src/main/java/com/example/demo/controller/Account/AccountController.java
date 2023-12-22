@@ -84,6 +84,16 @@ public class AccountController {
             BindingResult bind,
             @RequestParam(name = "id") int id) {
         ControllerCommon.setAccountInfo(user, account);
+        Account tmpa = Account.builder()
+                .age(10)
+                .userName("user3")
+                .nickName("あらいさん")
+                .orgPassword("Riot?01Organ")
+                .privileges(null)
+                .build();
+
+        System.out.println(tmpa.toString());
+
         if (accountr.findAll().size() == 1) {
             // 最後の一人なので削除不可能
             // 他にも、Privilegeとともに、findしないとだめかも
