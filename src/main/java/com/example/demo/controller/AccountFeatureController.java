@@ -18,7 +18,7 @@ import com.example.demo.model.Account;
 import com.example.demo.repository.AccountRepository;
 
 @Controller
-public class LoginFeatureController {
+public class AccountFeatureController {
     @Autowired
     AccountRepository accountr;
     @Autowired
