@@ -1,4 +1,4 @@
-package com.example.demo.controller;
+package com.example.demo.controller.Account;
 
 import java.util.Optional;
 
@@ -14,11 +14,12 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.example.demo.controller.ControllerCommon;
 import com.example.demo.model.Account;
 import com.example.demo.repository.AccountRepository;
 
 @Controller
-public class AccountFeatureController {
+public class AccountController {
     @Autowired
     AccountRepository accountr;
     @Autowired

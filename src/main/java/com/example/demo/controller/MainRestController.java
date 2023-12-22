@@ -10,11 +10,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.demo.model.Account;
 import com.example.demo.model.information;
 import com.example.demo.model.link;
 import com.example.demo.model.messageBoard;
-import com.example.demo.repository.AccountRepository;
 import com.example.demo.repository.informationRepository;
 import com.example.demo.repository.linkRepository;
 import com.example.demo.repository.messageBoardRepository;
@@ -33,9 +31,6 @@ public class MainRestController {
 
     @Autowired
     linkRepository linkr;
-
-    @Autowired
-    AccountRepository accountr;
 
     @PostMapping("/insertmsg")
     public ResponseEntity<?> insertmsg(@RequestBody messageBoard mb) {
@@ -118,22 +113,5 @@ public class MainRestController {
     public ResponseEntity<?> deletelink(@RequestBody link lnk) {
         linkr.delete(lnk);
         return ResponseEntity.ok().build();
-    }
-    
-    @GetMapping("/getusers")
-    public ResponseEntity<?> getUsers() {
-        ArrayList<Account> mblTmp = (ArrayList<Account>) accountr.findAll();
-        ObjectMapper mapper = new ObjectMapper();
-
-        try {
-            return ResponseEntity.ok().body(mapper.writeValueAsString(mblTmp));
-        } catch (JsonGenerationException | JsonMappingException e) {
-            // catch various errors
-            e.printStackTrace();
-        } catch (JsonProcessingException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-        return ResponseEntity.badRequest().build();
     }
 }
