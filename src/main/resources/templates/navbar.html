@@ -20,8 +20,8 @@
                 <button type="submit" formaction="link">外部リンク</button>
             </div>
             <div class="userInfo" th:object="${account}">
-                <span th:text="'ログインユーザー：' + *{userName}" />
-                <span th:text="'ニックネーム：' + *{nickName}" />
+                <div class="userName"><span th:text="'ログインユーザー：' + *{userName}" /></div>
+                <div class="nickName"><span th:text="'ニックネーム：' + *{nickName}" /></div>
             </div>
             <div class="accountMenu">
                 <input type="checkbox" id="accountMenu_check">

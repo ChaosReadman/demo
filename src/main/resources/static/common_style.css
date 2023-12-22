@@ -23,8 +23,13 @@
 
 .navbar {
     background-color: dodgerblue;
-    color: white;
+    top: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    position: fixed;
     height: 60px;
+    z-index: 90px;
 }
 
 .navButtons {
@@ -41,7 +46,7 @@
     color: white;
     justify-content: center;
     border: 0;
-    height: 60px;
+    height: 55px;
     width: 100px;
     position: relative;
     margin: 0 auto;
@@ -49,30 +54,27 @@
 }
 
 .title {
-    width: 30%;
-}
-
-.title span {
-    display: block;
+    color: white;
+    position: absolute;
+    width: 50%;
 }
 
 .titleName {
-    margin: 0 0 0 15px;
+    display: block;
+    margin: 5px 0 0 15px;
 }
 
 .clubName {
+    display: block;
     font-size: 12;
     margin: 0 0 0 30px;
 }
 
 .userInfo {
+    color: white;
     position: absolute;
     right: 0;
-    margin: 0 70px 0 0; 
-}
-
-.userInfo span {
-    display: block;
+    margin: 5px 70px 0 0;
 }
 
 .loginUser{
@@ -138,6 +140,7 @@
     width: 300px;
     position: fixed;
     top: 60px;
+    left: 100%;
     background-color: dodgerblue;
     transition: all 0.5s;
 }
