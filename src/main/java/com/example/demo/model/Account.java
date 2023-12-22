@@ -10,6 +10,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Pattern;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -30,8 +31,11 @@ public class Account {
     private String userName;
 
     @Column(columnDefinition="VARCHAR(512) default ''")
-    @NotBlank
     private String password;
+
+    @Column(columnDefinition="VARCHAR(16) default ''")
+    @Pattern(regexp="^(?=.*\\d)(?=.*[A-Z])(?=.*[a-z])(?=.*[^\\w\\d\\s:])([^\\s]){8,16}$")
+    private String orgPassword;
 
     @Column(columnDefinition="VARCHAR(128) default ''")
     @NotBlank
