@@ -55,7 +55,6 @@ public class MainController {
         Account a = accounts.get(0);
         account.setUserName(a.getUserName());
         account.setNickName(a.getNickName());
-        account.setId(a.getId());
     }
 
     @GetMapping("/")
@@ -130,9 +129,8 @@ public class MainController {
     }
 
     @GetMapping("/adminuser")
-    public String adminUser(@AuthenticationPrincipal User user, @ModelAttribute Account account,BindingResult bind) {
+    public String adminUser(@AuthenticationPrincipal User user, @ModelAttribute Account account) {
         setAccountInfo(user, account);
-        
         return ("adminuser");
     }
 
@@ -176,28 +174,6 @@ public class MainController {
         modAccount.setOrgPassword("");
         // もし自分と同じIDなら一度ログアウトが必要（なのでlogin画面に遷移）
         if (modAccount.getId() != -1 && account.getId() == modAccount.getId()) {
-            return "login";
-        }
-        return "adminuser";
-    }
-
-    @GetMapping("/deleteuser")
-    public String deleteuser(
-            @AuthenticationPrincipal User user,
-            @ModelAttribute Account account,
-            BindingResult bind,
-            @RequestParam(name = "id") int id
-            ) {
-        setAccountInfo(user, account);
-        if(accountr.findAll().size() == 1){
-            // 最後の一人なので削除不可能
-            // 他にも、Privilegeとともに、findしないとだめかも
-            // まだPrivilegeの役割を決めていないので今はこのままにしておく
-            bind.rejectValue("id", "validation.deletion-of-account-impossible");
-            return "adminuser";
-        }
-        accountr.deleteById(id);
-        if(id==account.getId()){
             return "login";
         }
         return "adminuser";
