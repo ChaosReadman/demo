@@ -1,41 +1,62 @@
 <!DOCTYPE html>
 <html xmlns:th="http://tymeleaf.org">
-    
-    <head>
-        <meta charset="UTF-8" />
-        <title>外部リンク</title>
-    </head>
-    
-    <body>
-        <div th:insert="~{navbar}" />
-        <input id="csrf" type="hidden" th:name="${_csrf.headerName}" th:value="${_csrf.token}" />
-        
-        <div id="pageTitle">外部リンク一覧</div>
-        
-        <div class="linkList">
-            <div class="linkform">
-                <table id="links">
-                </table>
-            </div>
-        </div>
 
-    <script th:src="@{/js/refresh.js}"></script>
+<head>
+    <meta charset="UTF-8" />
+    <title>外部リンク</title>
+</head>
+
+<body onload="init()">
     <script type="text/javascript">
-        refreshLink(); //リンクを表示しておく
+        function init() {
+            refreshLink();
+        }
 
-        //リンク表示を更新する関数
         function refreshLink() {
-            getRequest("/getlink", function(response){
-                var js = JSON.parse(response);
-                var tb = document.getElementById("links");
-                tb.innerHTML = "";
-                js.forEach((element) => {
-                    tb.innerHTML +=
-                        "<tr><td><a href='" + element.url + "' target='_blank' rel='noopener noreferrer'>" + element.title + "</a></td></tr>";
-                });
+            var header = document.getElementById("csrf").name;
+            var token = document.getElementById("csrf").value;
+            const url = "/getlink";
+            const req = new XMLHttpRequest();
+            req.withCredentials = true;
+            req.open("GET", url);
+
+            req.onreadystatechange = function () {
+                if (req.readyState == XMLHttpRequest.DONE) {
+                    let status = req.status;
+                    if (status === 0 || (status >= 200 && status < 400)) {
+                        refreshLinkTbl(req.responseText);
+                    } else {
+                        // エラー処理
+                        alert("HTTP-ERROR: " + status);
+                    }
+                }
+            };
+            req.setRequestHeader(header, token);
+            req.setRequestHeader("Content-type", "application/json; charset=utf-8");
+            req.send();
+        }
+
+        function refreshLinkTbl(tjs) {
+            var js = JSON.parse(tjs);
+            var tb = document.getElementById("links");
+            tb.innerHTML = "";
+            js.forEach((element) => {
+                tb.innerHTML +=
+                    "<tr><td><a href='" + element.url + "' target='_blank' rel='noopener noreferrer'>" + element.title + "</a></td></tr>";
             });
         }
     </script>
+    <div th:insert="~{navbar}" />
+    <input id="csrf" type="hidden" th:name="${_csrf.headerName}" th:value="${_csrf.token}" />
+    
+    <div id="pageTitle">外部リンク一覧</div>
+
+    <div class="linkList">
+        <div class="linkform">
+            <table id="links">
+            </table>
+        </div>
+    </div>
 </body>
 
 </html>

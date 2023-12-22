@@ -7,7 +7,80 @@
 
 </head>
 
-<body>
+<body onload="init()">
+    <script type="text/javascript">
+        function init() {
+            refreshInfo();
+        }
+
+        function postInfo() {
+            var header = document.getElementById("csrf").name;
+            var token = document.getElementById("csrf").value;
+            const url = "/insertinfo";
+            let data = JSON.stringify({
+                message: document.getElementById("message").value
+            });
+
+            const req = new XMLHttpRequest();
+            req.withCredentials = true;
+            req.open("POST", url);
+
+            req.onreadystatechange = function () {
+                if (req.readyState == XMLHttpRequest.DONE) {
+                    let status = req.status;
+                    if (status === 0 || (status >= 200 && status < 400)) {
+                        document.getElementById("message").value = "";
+                        refreshInfo();
+                    } else {
+                        // エラー処理
+                        alert("HTTP-ERROR: " + status);
+                    }
+                }
+            }
+            req.setRequestHeader(header, token);
+            req.setRequestHeader('Content-type', 'application/json; charset=utf-8');
+            req.send(data);
+        }
+
+        function refreshInfo() {
+            var header = document.getElementById("csrf").name;
+            var token = document.getElementById("csrf").value;
+            const url = "/getinfo";
+            const req = new XMLHttpRequest();
+            req.withCredentials = true;
+            req.open("GET", url);
+
+            req.onreadystatechange = function () {
+                if (req.readyState == XMLHttpRequest.DONE) {
+                    let status = req.status;
+                    if (status === 0 || (status >= 200 && status < 400)) {
+                        refreshInfoTbl(req.responseText);
+                        var  form = document.getElementsByClassName("infoform");
+
+                        form[0].scrollTo(0, msgs.scrollHeight);
+                    } else {
+                        // エラー処理
+                        alert("HTTP-ERROR: " + status);
+                    }
+                }
+            }
+            req.setRequestHeader(header, token);
+            req.setRequestHeader('Content-type', 'application/json; charset=utf-8');
+            req.send();
+        }
+
+        function refreshInfoTbl(tjs) {
+            var js = JSON.parse(tjs);
+            var tr;
+            var td;
+            var tb = document.getElementById("infos");
+            tb.innerHTML = "";
+            js.forEach(element => {
+                tb.innerHTML += 
+                '<tr><td><textarea>' + element.message + '</textarea></td></tr>';
+            });
+        }
+    </script>
     <div th:insert="~{navbar}"> </div>
     <div id="msg">
         <label>おしらせ投稿</label>
@@ -19,86 +92,6 @@
         <table id="infos">
         </table>
     </form>
-
-    <script th:src="@{/js/refresh.js}"></script>
-    <script type="text/javascript">
-        refreshInfoTbl();
-        
-        function postInfo() {
-            let data = JSON.stringify({
-                message: document.getElementById("message").value
-            });
-
-            postRequest("/insertinfo", data, function(){
-                document.getElementById("message").value = "";
-                refreshInfoTbl();
-            })
-
-            // var header = document.getElementById("csrf").name;
-            // var token = document.getElementById("csrf").value;
-            // const url = "/insertinfo";
-
-            // const req = new XMLHttpRequest();
-            // req.withCredentials = true;
-            // req.open("POST", url);
-
-            // req.onreadystatechange = function () {
-            //     if (req.readyState == XMLHttpRequest.DONE) {
-            //         let status = req.status;
-            //         if (status === 0 || (status >= 200 && status < 400)) {
-            //             document.getElementById("message").value = "";
-            //             refreshInfoTbl();
-            //         } else {
-            //             // エラー処理
-            //             alert("HTTP-ERROR: " + status);
-            //         }
-            //     }
-            // }
-            // req.setRequestHeader(header, token);
-            // req.setRequestHeader('Content-type', 'application/json; charset=utf-8');
-            // req.send(data);
-        }
-
-        // function refreshInfo() {
-        //     var header = document.getElementById("csrf").name;
-        //     var token = document.getElementById("csrf").value;
-        //     const url = "/getinfo";
-        //     const req = new XMLHttpRequest();
-        //     req.withCredentials = true;
-        //     req.open("GET", url);
-
-        //     req.onreadystatechange = function () {
-        //         if (req.readyState == XMLHttpRequest.DONE) {
-        //             let status = req.status;
-        //             if (status === 0 || (status >= 200 && status < 400)) {
-  
-        //             } else {
-        //                 // エラー処理
-        //                 alert("HTTP-ERROR: " + status);
-        //             }
-        //         }
-        //     }
-        //     req.setRequestHeader(header, token);
-        //     req.setRequestHeader('Content-type', 'application/json; charset=utf-8');
-        //     req.send();
-        // }
-
-        function refreshInfoTbl() {
-            getRequest("/getinfo", function(response){
-                var js = JSON.parse(response);
-                var tb = document.getElementById("infos");
-                tb.innerHTML = "";
-                js.forEach(element => {
-                    tb.innerHTML += 
-                    '<tr><td><textarea>' + element.message + '</textarea></td></tr>';
-                });
-                var  form = document.getElementsByClassName("infoform");
-                form[0].scrollTo(0, form[0].scrollHeight);
-            })
-
-        }
-    </script>
-
 </body>
 
 </html>

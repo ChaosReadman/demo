@@ -6,7 +6,7 @@
     <title>掲示板</title>
 </head>
 
-<body>
+<body onload="init()">
     <div th:insert="~{navbar}"> </div>
     <div id="pageTitle">掲示板</div>
     
@@ -23,21 +23,44 @@
         <button id="send" onclick="postMsg();">送信</button>
     </div>
 
-    <script th:src="@{/js/refresh.js}"></script>
+    <script th:src="@{/js/refreshMsg.js}"></script>
     <script type="text/javascript">
-        //定期的に表示を更新
-        exeLoop(5000, refreshMsg);
+        function init() {
+            refreshMsg();
+            setInterval(function () {
+                refreshMsg();
+            }, 5000);
+        }
 
         function postMsg() {
+            var header = document.getElementById("csrf").name;
+            var token = document.getElementById("csrf").value;
+            const url = "/insertmsg";
             let data = JSON.stringify({
                 userName: document.getElementById("user").value,
                 message: document.getElementById("message").value,
             });
-            postRequest("insertmsg", data, function(){
-                refreshMsg();
-            })
-        }
 
+            const req = new XMLHttpRequest();
+            req.withCredentials = true;
+            req.open("POST", url);
+
+            req.onreadystatechange = function () {
+                if (req.readyState == XMLHttpRequest.DONE) {
+                    let status = req.status;
+                    if (status === 0 || (status >= 200 && status < 400)) {
+                        document.getElementById("message").value = "";
+                        refreshMsg();
+                    } else {
+                        // エラー処理
+                        alert("HTTP-ERROR: " + status);
+                    }
+                }
+            }
+            req.setRequestHeader(header, token);
+            req.setRequestHeader('Content-type', 'application/json; charset=utf-8');
+            req.send(data);
+        }
     </script>
 </body>
 
