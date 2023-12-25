@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import com.example.demo.model.Account;
 import com.example.demo.model.UserInfo;
+import com.example.demo.model.exinformation;
 import com.example.demo.model.information;
 import com.example.demo.model.link;
 import com.example.demo.model.messageBoard;
@@ -89,5 +90,13 @@ public class MainController {
         ControllerCommon.setAccountInfo(user, account);
 
         return ("linkEdit");
+    }
+
+    @GetMapping("/exinformationEdit")
+    public String exinformation(@AuthenticationPrincipal User user, @ModelAttribute Account account,
+            @ModelAttribute("exinfo") exinformation exinfo) {
+        ControllerCommon.setAccountInfo(user, account);
+
+        return ("exinformationEdit");
     }
 }

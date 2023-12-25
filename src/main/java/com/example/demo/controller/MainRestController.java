@@ -10,9 +10,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.demo.model.exinformation;
 import com.example.demo.model.information;
 import com.example.demo.model.link;
 import com.example.demo.model.messageBoard;
+import com.example.demo.repository.exinformationRepository;
 import com.example.demo.repository.informationRepository;
 import com.example.demo.repository.linkRepository;
 import com.example.demo.repository.messageBoardRepository;
@@ -28,6 +30,9 @@ public class MainRestController {
 
     @Autowired
     informationRepository infor;
+
+     @Autowired
+    exinformationRepository exinfor;
 
     @Autowired
     linkRepository linkr;
@@ -113,5 +118,31 @@ public class MainRestController {
     public ResponseEntity<?> deletelink(@RequestBody link lnk) {
         linkr.delete(lnk);
         return ResponseEntity.ok().build();
+    }
+
+    @PostMapping("/insertexinfo")
+    public ResponseEntity<?> insertexinfo(@RequestBody exinformation exinfo) {
+        if (!exinfo.getMessage().equals("")) {
+            exinfor.insert(exinfo);
+            exinfo.setMessage("");
+        }
+        return ResponseEntity.ok().build();
+    }
+
+    @GetMapping("/getexinfo")
+    public ResponseEntity<?> getexinfo() {
+        ArrayList<exinformation> mblTmp = (ArrayList<exinformation>) exinfor.findAll();
+        ObjectMapper mapper = new ObjectMapper();
+
+        try {
+            return ResponseEntity.ok().body(mapper.writeValueAsString(mblTmp));
+        } catch (JsonGenerationException | JsonMappingException e) {
+            // catch various errors
+            e.printStackTrace();
+        } catch (JsonProcessingException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        return ResponseEntity.badRequest().build();
     }
 }
