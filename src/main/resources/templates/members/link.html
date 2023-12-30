@@ -15,7 +15,7 @@
         function refreshLink() {
             var header = document.getElementById("csrf").name;
             var token = document.getElementById("csrf").value;
-            const url = "/getlink";
+            const url = "/members/getlink";
             const req = new XMLHttpRequest();
             req.withCredentials = true;
             req.open("GET", url);
@@ -46,7 +46,7 @@
             });
         }
     </script>
-    <div th:insert="~{navbar}" />
+    <div th:insert="~{/members/navbar}" />
     <input id="csrf" type="hidden" th:name="${_csrf.headerName}" th:value="${_csrf.token}" />
     
     <div id="pageTitle">外部リンク一覧</div>

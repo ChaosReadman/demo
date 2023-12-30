@@ -7,7 +7,7 @@
 </head>
 
 <body onload="init()">
-    <div th:insert="~{navbar}"> </div>
+    <div th:insert="~{/members/navbar}"> </div>
     <div id="pageTitle">掲示板</div>
     
     <!-- 掲示板本体 -->
@@ -42,7 +42,7 @@
                 message: document.getElementById("message").value,
             });
 
-            postRequest("/insertmsg", data, function(){
+            postRequest("/members/insertmsg", data, function(){
                 document.getElementById("message").value = "";
                 refreshMsg();
             })

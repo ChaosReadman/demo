@@ -37,7 +37,7 @@ public class MainRestController {
     @Autowired
     linkRepository linkr;
 
-    @PostMapping("/insertmsg")
+    @PostMapping("/members/insertmsg")
     public ResponseEntity<?> insertmsg(@RequestBody messageBoard mb) {
         if (!mb.getMessage().equals("")) {
             mbr.insert(mb);
@@ -46,7 +46,7 @@ public class MainRestController {
         return ResponseEntity.ok().build();
     }
 
-    @GetMapping("/getmsg")
+    @GetMapping("/members/getmsg")
     public ResponseEntity<?> getmsg() {
         ArrayList<messageBoard> mblTmp = (ArrayList<messageBoard>) mbr.findAll();
         ObjectMapper mapper = new ObjectMapper();
@@ -63,7 +63,7 @@ public class MainRestController {
         return ResponseEntity.badRequest().build();
     }
 
-    @PostMapping("/insertinfo")
+    @PostMapping("/members/insertinfo")
     public ResponseEntity<?> insertinfo(@RequestBody information info) {
         if (!info.getMessage().equals("")) {
             infor.insert(info);
@@ -72,7 +72,7 @@ public class MainRestController {
         return ResponseEntity.ok().build();
     }
 
-    @GetMapping("/getinfo")
+    @GetMapping("/members/getinfo")
     public ResponseEntity<?> getinfo() {
         ArrayList<information> mblTmp = (ArrayList<information>) infor.findAll();
         ObjectMapper mapper = new ObjectMapper();
@@ -89,7 +89,7 @@ public class MainRestController {
         return ResponseEntity.badRequest().build();
     }
 
-    @PostMapping("/insertlink")
+    @PostMapping("/members/insertlink")
     public ResponseEntity<?> insertlink(@RequestBody @Validated link lnk) {
         if (!lnk.getTitle().equals("") || !lnk.getUrl().equals("")) {
             linkr.insert(lnk);
@@ -97,7 +97,7 @@ public class MainRestController {
         return ResponseEntity.ok().build();
     }
 
-    @GetMapping("/getlink")
+    @GetMapping("/members/getlink")
     public ResponseEntity<?> getlink() {
         ArrayList<link> mblTmp = (ArrayList<link>) linkr.findAll();
         ObjectMapper mapper = new ObjectMapper();
@@ -114,13 +114,13 @@ public class MainRestController {
         return ResponseEntity.badRequest().build();
     }
 
-    @PostMapping("/deletelink")
+    @PostMapping("/members/deletelink")
     public ResponseEntity<?> deletelink(@RequestBody link lnk) {
         linkr.delete(lnk);
         return ResponseEntity.ok().build();
     }
 
-    @PostMapping("/insertexinfo")
+    @PostMapping("/members/insertexinfo")
     public ResponseEntity<?> insertexinfo(@RequestBody exinformation exinfo) {
         if (!exinfo.getMessage().equals("")) {
             exinfor.insert(exinfo);
@@ -129,7 +129,7 @@ public class MainRestController {
         return ResponseEntity.ok().build();
     }
 
-    @GetMapping("/getexinfo")
+    @GetMapping("/members/getexinfo")
     public ResponseEntity<?> getexinfo() {
         ArrayList<exinformation> mblTmp = (ArrayList<exinformation>) exinfor.findAll();
         ObjectMapper mapper = new ObjectMapper();

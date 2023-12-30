@@ -9,7 +9,7 @@
 
 <body>
     <h1>ログインページ</h1>
-    <form method="post" action="index.html" th:action="@{/login}">
+    <form method="post" th:action="@{/members/login}">
         <div th:if="${param.error}">
             ログインに失敗しました
             <div th:if="${session[SPRING_SECURITY_LAST_EXCEPTION] != null}">

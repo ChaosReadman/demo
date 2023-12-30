@@ -7,7 +7,7 @@
 
 </head>
 <body>
-    <div th:insert="~{navbar}">  </div>
+    <div th:insert="~{/members/navbar}">  </div>
     <form th:object="${userInfo}" >
         姓：[[${userInfo.lastName}]]<br>
         名：[[${userInfo.firstName}]]<br>

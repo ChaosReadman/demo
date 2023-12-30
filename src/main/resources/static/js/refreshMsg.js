@@ -20,7 +20,7 @@ function refreshTbl(tjs) {
 function refreshMsg() {
     var header = document.getElementById("csrf").name;
     var token = document.getElementById("csrf").value;
-    const url = "/getmsg";
+    const url = "/members/getmsg";
     const req = new XMLHttpRequest();
     req.withCredentials = true;
     req.open("GET", url);

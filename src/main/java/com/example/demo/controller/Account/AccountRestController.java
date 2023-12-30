@@ -19,7 +19,7 @@ public class AccountRestController {
     @Autowired
     AccountRepository accountr;
 
-    @GetMapping("/getusers")
+    @GetMapping("/members/getusers")
     public ResponseEntity<?> getUsers() {
         ArrayList<Account> mblTmp = (ArrayList<Account>) accountr.findAll();
         ObjectMapper mapper = new ObjectMapper();

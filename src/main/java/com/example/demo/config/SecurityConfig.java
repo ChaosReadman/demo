@@ -29,10 +29,10 @@ public class SecurityConfig {
                                                 .permitAll()
                                                 .anyRequest()
                                                 .authenticated())
-                                .securityMatcher("/**")
+                                .securityMatcher("/members/**")
                                 .headers((headers) -> headers.frameOptions((frame) -> frame.sameOrigin()))
                                 .formLogin((form) -> form
-                                                .loginPage("/login")
+                                                .loginPage("/members/login")
                                                 .permitAll())
                                 .logout((logout) -> logout.permitAll())
                                 .build();

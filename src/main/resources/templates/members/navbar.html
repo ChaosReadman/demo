@@ -14,10 +14,10 @@
                 <span class="clubName">○○地区××サークル</span>
             </div>
             <div class="navButtons">
-                <button type="submit" formaction="/">TOP</button>
-                <button type="submit" formaction="form">入力画面</button>
-                <button type="submit" formaction="messageboard">掲示板</button>
-                <button type="submit" formaction="link">外部リンク</button>
+                <button type="submit" formaction="/members/">TOP</button>
+                <button type="submit" formaction="/members/form">入力画面</button>
+                <button type="submit" formaction="/members/messageboard">掲示板</button>
+                <button type="submit" formaction="/members/link">外部リンク</button>
             </div>
             <div class="userInfo" th:object="${account}">
                 <span th:text="'ログインユーザー：' + *{userName}" />
@@ -34,19 +34,19 @@
                             <button type="submit" formaction="#">個人情報編集</button>
                         </li>
                         <li class="accountMenu_item">
-                            <button type="submit" formaction="informationEdit">おしらせ投稿</button>
+                            <button type="submit" formaction="/members/informationEdit">おしらせ投稿</button>
                         </li>
                         <li class="accountMenu_item">
-                            <button type="submit" formaction="exinformationEdit">外部おしらせ投稿</button>
+                            <button type="submit" formaction="/members/exinformationEdit">外部おしらせ投稿</button>
                         </li>
                         <li class="accountMenu_item">
-                            <button type="submit" formaction="adminuser">ユーザ管理</button>
+                            <button type="submit" formaction="/members/adminuser">ユーザ管理</button>
                         </li>
                         <li class="accountMenu_item">
-                            <button type="submit" formaction="linkEdit">外部リンク編集</button>
+                            <button type="submit" formaction="/members/linkEdit">外部リンク編集</button>
                         </li>
                         <li class="accountMenu_item">
-                            <button type="submit" formaction="/logout" formmethod="post">ログアウト</button>
+                            <button type="submit" formaction="/members/logout" formmethod="post">ログアウト</button>
                         </li>
                     </ul>
                 </div>

@@ -1,0 +1,61 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+    
+    <head>
+        <meta charset="UTF-8">
+        <title>エニィ・倶楽部</title>
+        <link rel="stylesheet" th:href="@{/common_style.css}" />
+    </head>
+    
+    <body onload="init();">
+        <div th:insert="~{/members/navbar}" />
+        <input id="csrf" type="hidden" th:name="${_csrf.headerName}" th:value="${_csrf.token}" />
+        
+        <div class="topnews">
+            <p><b>お知らせ</b></p>
+            <div class="infoform">
+                <table id="infos">
+                </table>
+            </div>
+        </div>
+        <div class="topchat">
+            <p><b>掲示板</b></p>
+            <div class="msgform" id="msgs"></div>
+        </div>
+
+    <script th:src="@{/js/refreshMsg.js}"></script>
+    <script th:src="@{/js/http.js}"></script>
+    <script type="text/javascript">
+        function init() {
+            // お知らせを更新
+            refreshInfo();
+            // 定期的に掲示板を更新
+            refreshMsg();
+            setInterval(function () {
+                refreshMsg();
+            }, 5000);
+        }
+
+        function refreshInfo() {
+            getRequest("/members/getinfo", function(response){
+                refreshInfoTbl(response);
+                var  form = document.getElementsByClassName("infoform");
+                form[0].scrollTo(0, msgs.scrollHeight);
+            });
+        }
+
+        function refreshInfoTbl(tjs) {
+            var js = JSON.parse(tjs);
+            var tb = document.getElementById("infos");
+            tb.innerHTML = "";
+            js.forEach(element => {
+                tb.innerHTML += 
+                '<tr><td><textarea>' + element.message + '</textarea></td></tr>';
+            });
+        }
+    </script>
+
+
+
+</body>
+
+</html>

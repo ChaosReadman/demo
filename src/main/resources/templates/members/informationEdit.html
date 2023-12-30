@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>外部向けおしらせ</title>
+    <title>おしらせ投稿フォーム</title>
 
 </head>
 
@@ -16,7 +16,7 @@
         function postInfo() {
             var header = document.getElementById("csrf").name;
             var token = document.getElementById("csrf").value;
-            const url = "/insertexinfo";
+            const url = "/members/insertinfo";
             let data = JSON.stringify({
                 message: document.getElementById("message").value
             });
@@ -45,7 +45,7 @@
         function refreshInfo() {
             var header = document.getElementById("csrf").name;
             var token = document.getElementById("csrf").value;
-            const url = "/getexinfo";
+            const url = "/members/getinfo";
             const req = new XMLHttpRequest();
             req.withCredentials = true;
             req.open("GET", url);
@@ -81,11 +81,11 @@
             });
         }
     </script>
-    <div th:insert="~{navbar}"> </div>
+    <div th:insert="~{/members/navbar}"> </div>
     <div id="msg">
-        <label>外部向けおしらせ</label>
+        <label>おしらせ投稿</label>
         <input id="csrf" type="hidden" th:name="${_csrf.headerName}" th:value="${_csrf.token}" />
-        <textarea id="message" rows="20" cols="40"></textarea>
+        <textarea id="message" rows="20" cols="40">あいうえお</textarea>
         <button id="send" onclick='postInfo();'>送信</button>
     </div>
     <form class="infoform">

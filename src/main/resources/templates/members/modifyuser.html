@@ -9,11 +9,11 @@
 
 <body>
     <script></script>
-    <div th:insert="~{navbar}"></div>
+    <div th:insert="~{/members/navbar}"></div>
     <br>
     <br>
     <br>
-    <form th:action="@{/updateuser}" method="POST" th:object="${modAccount}">
+    <form th:action="@{/members/updateuser}" method="POST" th:object="${modAccount}">
         <input name="id" th:value="*{id}">
         <table>
             <tbody>

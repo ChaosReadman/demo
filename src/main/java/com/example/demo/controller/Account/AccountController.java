@@ -25,14 +25,14 @@ public class AccountController {
     @Autowired
     PasswordEncoder encoder;
 
-    @GetMapping("/adminuser")
+    @GetMapping("/members/adminuser")
     public String adminUser(@AuthenticationPrincipal User user, @ModelAttribute Account account, BindingResult bind) {
         ControllerCommon.setAccountInfo(user, account);
 
-        return ("adminuser");
+        return ("/members/adminuser");
     }
 
-    @GetMapping("/modifyuser")
+    @GetMapping("/members/modifyuser")
     public String modifyUser(
             @AuthenticationPrincipal User user,
             @ModelAttribute Account account,
@@ -51,15 +51,15 @@ public class AccountController {
             modAccount.setPrivileges(tmpAccount.get().getPrivileges());
         }
 
-        return ("modifyuser");
+        return ("/members/modifyuser");
     }
 
-    @PostMapping("updateuser")
+    @PostMapping("/members/updateuser")
     public String updateuser(@AuthenticationPrincipal User user, @ModelAttribute Account account,
             @ModelAttribute(name = "modAccount") @Validated Account modAccount, BindingResult bind) {
         ControllerCommon.setAccountInfo(user, account);
         if (bind.hasErrors()) {
-            return "modifyuser";
+            return "/members/modifyuser";
         }
         modAccount.setLastUpdateUser(account.getUserName());
         modAccount.setPassword(encoder.encode(modAccount.getOrgPassword()));
@@ -72,12 +72,12 @@ public class AccountController {
         modAccount.setOrgPassword("");
         // もし自分と同じIDなら一度ログアウトが必要（なのでlogin画面に遷移）
         if (modAccount.getId() != -1 && account.getId() == modAccount.getId()) {
-            return "login";
+            return "/members/login";
         }
-        return "adminuser";
+        return "/members/adminuser";
     }
 
-    @GetMapping("/deleteuser")
+    @GetMapping("/members/deleteuser")
     public String deleteuser(
             @AuthenticationPrincipal User user,
             @ModelAttribute Account account,
@@ -99,12 +99,12 @@ public class AccountController {
             // 他にも、Privilegeとともに、findしないとだめかも
             // まだPrivilegeの役割を決めていないので今はこのままにしておく
             bind.rejectValue("id", "validation.deletion-of-account-impossible");
-            return "adminuser";
+            return "/members/adminuser";
         }
         accountr.deleteById(id);
         if (id == account.getId()) {
-            return "login";
+            return "/members/login";
         }
-        return "adminuser";
+        return "/members/adminuser";
     }
 }

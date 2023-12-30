@@ -22,9 +22,7 @@ public class MainController {
     messageBoardRepository mbr;
 
     @GetMapping("/")
-    String index(@AuthenticationPrincipal User user, @ModelAttribute Account account) {
-        // @AuthenticationPrincipal で user にキャストされた情報が入ってくるので、Accountへ情報を渡し、画面で表示する
-        ControllerCommon.setAccountInfo(user, account);
+    String index() {
         return ("index");
     }
 
@@ -33,70 +31,78 @@ public class MainController {
         return ("support");
     }
 
-    @GetMapping("/login")
+    @GetMapping("/members/login")
     String login() {
-        return ("login");
+        return ("/members/login");
     }
 
-    @PostMapping("/logout")
+    @GetMapping("/members/")
+    String membertop(@AuthenticationPrincipal User user, @ModelAttribute Account account){
+        // @AuthenticationPrincipal で user にキャストされた情報が入ってくるので、Accountへ情報を渡し、画面で表示する
+        ControllerCommon.setAccountInfo(user, account);
+
+        return ("/members/index");
+    }
+
+    @PostMapping("/members/logout")
     public String performLogout() {
         // .. perform logout
-        return "login";
+        return "/members/login";
     }
 
-    @GetMapping("/form")
+    @GetMapping("/members/form")
     private String inputForm(@AuthenticationPrincipal User user, @ModelAttribute UserInfo userInfo,
             @ModelAttribute Account account) {
         ControllerCommon.setAccountInfo(user, account);
 
-        return ("inputForm");
+        return ("/members/inputForm");
     }
 
-    @PostMapping("/form")
+    @PostMapping("/members/form")
     private String confirmForm(@AuthenticationPrincipal User user, @ModelAttribute UserInfo userInfo,
             @ModelAttribute Account account) {
         ControllerCommon.setAccountInfo(user, account);
-        return ("confirm");
+        return ("/members/confirm");
     }
 
-    @GetMapping("/messageboard")
+    @GetMapping("/members/messageboard")
     public String messageBoard(@AuthenticationPrincipal User user, @ModelAttribute Account account,
             @ModelAttribute("mb") messageBoard mb) {
         ControllerCommon.setAccountInfo(user, account);
         mb.setUserName(account.getNickName());
 
-        return ("messageboard");
+        return ("/members/messageboard");
     }
 
-    @GetMapping("/informationEdit")
+    @GetMapping("/members/informationEdit")
     public String information(@AuthenticationPrincipal User user, @ModelAttribute Account account,
             @ModelAttribute("info") information info) {
         ControllerCommon.setAccountInfo(user, account);
 
-        return ("informationEdit");
+        return ("/members/informationEdit");
     }
 
-    @GetMapping("/link")
+    @GetMapping("/members/link")
     public String link(@AuthenticationPrincipal User user, @ModelAttribute Account account,
             @ModelAttribute("lnk") link lnk) {
         ControllerCommon.setAccountInfo(user, account);
 
-        return ("link");
+        return ("/members/link");
     }
 
-    @GetMapping("/linkEdit")
+    @GetMapping("/members/linkEdit")
     public String linkEdit(@AuthenticationPrincipal User user, @ModelAttribute Account account,
             @ModelAttribute("lnk") link lnk) {
         ControllerCommon.setAccountInfo(user, account);
 
-        return ("linkEdit");
+        return ("/members/linkEdit");
     }
 
-    @GetMapping("/exinformationEdit")
+    @GetMapping("/members/exinformationEdit")
     public String exinformation(@AuthenticationPrincipal User user, @ModelAttribute Account account,
             @ModelAttribute("exinfo") exinformation exinfo) {
         ControllerCommon.setAccountInfo(user, account);
 
-        return ("exinformationEdit");
+        return ("/members/exinformationEdit");
     }
 }
