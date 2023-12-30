@@ -43,11 +43,11 @@
                     '<td name="userName">' + element.userName + ' </td>' +
                     '<td name="nickName">' + element.nickName + ' </td>' +
                     '<td><form action="/modifyuser">' +
-                    '<input name="id" value=' + element.id + '>' +
+                    '<input hidden name="id" value=' + element.id + '>' +
                     '<button type="submit" >修正</button>' +
                     '</form></td>' +
                     '<td><form action="/deleteuser">' +
-                    '<input name="id" value=' + element.id + '>' +
+                    '<input hidden name="id" value=' + element.id + '>' +
                     '<button type="submit" >削除</button>' +
                     '</form></td>' +
                     '<tr>';
@@ -59,7 +59,7 @@
     <div th:if="${#fields.hasErrors('${account.id}')}"  th:errors="${account.id}"></div>
     <br>
     <form action="/modifyuser">
-        <input name="id" th:value="-1">
+        <input hidden name="id" th:value="-1">
         <button type="submit">追加</button>
     </form>
     <table id="users">
