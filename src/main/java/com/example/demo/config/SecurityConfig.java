@@ -22,9 +22,9 @@ public class SecurityConfig {
                                 .servletPath("/h2-console")
                                 .pattern("/**");
                 return http
-                                .csrf(csrf->csrf
-                                .ignoringRequestMatchers(mvcRequestMatcher))
-                                .authorizeHttpRequests(requests-> requests
+                                .csrf(csrf -> csrf
+                                                .ignoringRequestMatchers(mvcRequestMatcher))
+                                .authorizeHttpRequests(requests -> requests
                                                 .requestMatchers(mvcRequestMatcher)
                                                 .permitAll()
                                                 .anyRequest()
@@ -39,7 +39,7 @@ public class SecurityConfig {
         }
 
         @Bean
-	public PasswordEncoder passwordEncoder() {
-		return new BCryptPasswordEncoder();
-	}
+        public PasswordEncoder passwordEncoder() {
+                return new BCryptPasswordEncoder();
+        }
 }

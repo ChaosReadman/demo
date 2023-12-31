@@ -1,8 +1,10 @@
 package com.example.demo.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.User;
+import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -16,8 +18,13 @@ import com.example.demo.model.link;
 import com.example.demo.model.messageBoard;
 import com.example.demo.repository.messageBoardRepository;
 
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+
 @Controller
 public class MainController {
+    SecurityContextLogoutHandler logoutHandler = new SecurityContextLogoutHandler();
+
     @Autowired
     messageBoardRepository mbr;
 
@@ -37,7 +44,7 @@ public class MainController {
     }
 
     @GetMapping("/members/")
-    String membertop(@AuthenticationPrincipal User user, @ModelAttribute Account account){
+    String membertop(@AuthenticationPrincipal User user, @ModelAttribute Account account) {
         // @AuthenticationPrincipal で user にキャストされた情報が入ってくるので、Accountへ情報を渡し、画面で表示する
         ControllerCommon.setAccountInfo(user, account);
 
@@ -45,9 +52,11 @@ public class MainController {
     }
 
     @PostMapping("/members/logout")
-    public String performLogout() {
+    public String performLogout(Authentication authentication, HttpServletRequest request,
+            HttpServletResponse response) {
         // .. perform logout
-        return "/members/login";
+        this.logoutHandler.logout(request, response, authentication);
+        return "redirect:/";
     }
 
     @GetMapping("/members/form")
