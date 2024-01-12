@@ -16,10 +16,9 @@
     
     <!-- メッセージ入力欄 -->
     <div id="msg">
-        <label>メッセージ</label>
         <input id="csrf" type="hidden" th:name="${_csrf.headerName}" th:value="${_csrf.token}" />
         <input id="user" type="text" th:readonly="${true}" th:field="${mb.userName}">
-        <input id="message" type="text" th:field="${mb.message}">
+        <textarea id="message" class="form-control" type="text" th:field="${mb.message}" placeholder="メッセージ" rows="5"></textarea>
         <button id="send" onclick="postMsg();">送信</button>
     </div>
 
