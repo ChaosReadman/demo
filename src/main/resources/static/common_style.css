@@ -193,6 +193,11 @@ div.msgform {
     width: 30%;
 }
 
+#msg > * {
+    margin-top: 5px;
+    display: block;
+}
+
 .button-set {
     text-align: center;
 }
