@@ -1,14 +1,21 @@
 {
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
     "configurations": [
         {
             "type": "java",
-            "name": "Spring Boot-DemoApplication<demo>",
+            "name": "Current File",
             "request": "launch",
-            "cwd": "${workspaceFolder}",
+            "mainClass": "${file}"
+        },
+        {
+            "type": "java",
+            "name": "DemoApplication",
+            "request": "launch",
             "mainClass": "com.example.demo.DemoApplication",
-            "projectName": "demo",
-            "args": "",
-            "envFile": "${workspaceFolder}/.env"
+            "projectName": "demo"
         }
     ]
 }

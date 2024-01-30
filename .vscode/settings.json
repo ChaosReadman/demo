@@ -1,4 +1,4 @@
 {
-    "java.compile.nullAnalysis.mode": "automatic",
-    "java.debug.settings.onBuildFailureProceed": true
+    "java.jdt.ls.java.home": "/opt/jdk/",
+    "java.compile.nullAnalysis.mode": "automatic"
 }
