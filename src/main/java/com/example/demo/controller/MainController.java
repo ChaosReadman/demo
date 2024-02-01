@@ -114,4 +114,11 @@ public class MainController {
 
         return ("/members/exinformationEdit");
     }
+
+    @GetMapping("/members/makePage")
+    public String makePage(@AuthenticationPrincipal User user, @ModelAttribute Account account) {
+        ControllerCommon.setAccountInfo(user, account);
+
+        return ("/members/makePage");
+    }
 }

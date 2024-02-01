@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="http://tymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>ページ作成</title>
+</head>
+<body>
+<div th:insert="~{/members/navbar}"> </div>
+<h1>ページ作成</h1>
+
+<div>
+  <button id="makeWithNocodeBtn">ノーコードで作成</button>
+  <button>元に戻す</button>
+  <button>やり直し</button>
+  <button>検索</button>
+  <button>太字</button>
+  <button>斜体</button>
+  <button>取り消し線</button>
+  <button>リンクを挿入</button>
+  <button>画像を挿入</button>
+  <button>動画を挿入</button>
+</div>
+<textarea id="htmlTextarea" rows="20"></textarea>
+<button id="previewBtn">プレビュー</button>
+
+<script>
+  const htmlTextarea = document.getElementById("htmlTextarea");
+  const previewBtn = document.getElementById("previewBtn");
+  const makeWithNocodeBtn = document.getElementById("makeWithNocodeBtn");
+
+  let bodyBackup;
+
+
+
+previewBtn.addEventListener("click", () =>{
+  //プレビューからエディターに戻るため、イベントリスナーを含むbodyをバックアップ
+  const bodyBackup = document.body.cloneNode(true);
+
+  const html = htmlTextarea.value;
+
+  //プレビューを表示しつつ、プレビューから戻るボタンを追加
+  let body = document.body;
+  body.innerHTML = html + "<button id='returnToEditorBtn'>戻る</button>";
+  returnToEditorBtn = document.getElementById("returnToEditorBtn");
+
+  //戻るボタンが押されたとき、プレビューから戻る
+  returnToEditorBtn.addEventListener("click", () => {
+    //プレビューから戻った後、もう一度プレビューできないから要修正
+    //イベントリスナーがbodyBackupから消えてるから2回目以降のプレビューができない
+    //サーバーを通じて別タブでプレビューを開くか、イベントハンドラを上手くクローンするかなどを要検討する必要あり
+    body.parentNode.replaceChildren(bodyBackup);
+  })
+
+})
+
+</script>
+</body>
+</html>

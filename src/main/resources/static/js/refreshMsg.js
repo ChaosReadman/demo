@@ -12,7 +12,7 @@ function refreshTbl(tjs) {
         addElm =  `<div class='msgRow'>`
         addElm += `<div>${showDate}</div>`
         addElm += `<div><span>${element.userName}</span> : <span class='saidMsg'>${element.message}</span></div>`
-        addElm += `</div>`    
+        addElm += `</div>`
         tb.innerHTML += addElm
     });
 }
