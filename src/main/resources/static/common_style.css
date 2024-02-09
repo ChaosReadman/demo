@@ -206,7 +206,7 @@ div.msgform {
     width: 80px;
 }
 
-#htmlTextarea {
+#htmlTextarea, #nocodeTextarea {
     width: 100%;
     height: 70%;
   }
