@@ -65,10 +65,10 @@
       previewArea.style = "display: block;";
 
       //エディターで作成したhtmlを、プレビューに反映
-      previewArea.innerHTML = htmlTextarea.innerHTML;
+      previewArea.innerHTML = htmlTextarea.value;
 
       //プレビューから戻るボタンを作成し表示
-      previewArea.innerHTML += "<button id='returnToEditorBtn'>戻る</button>";
+      previewArea.innerHTML += "<div><button id='returnToEditorBtn'>戻る</button></div>";
       returnToEditorBtn = document.getElementById("returnToEditorBtn");
 
 
