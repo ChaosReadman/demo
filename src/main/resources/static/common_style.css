@@ -205,8 +205,3 @@ div.msgform {
 .button-set button{
     width: 80px;
 }
-
-#htmlTextarea, #nocodeTextarea {
-    width: 100%;
-    height: 70%;
-  }

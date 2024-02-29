@@ -4,64 +4,153 @@
 <head>
   <meta charset="UTF-8">
   <title>ページ作成</title>
+    <!-- Style CSS -->
+    <link rel="stylesheet" th:href="@{/makePage.css}" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+      integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
 </head>
 
 <body>
   <div th:insert="~{/members/navbar}"> </div>
 
-  <div id="editor">
-    <h1>ページ作成</h1>
-    <div id="htmlEditor">
-      <button id="makeWithNocodeBtn">ノーコードで作成</button>
-      <button>元に戻す</button>
-      <button>やり直し</button>
-      <button>検索</button>
-      <button>太字</button>
-      <button>斜体</button>
-      <button>取り消し線</button>
-      <button>リンクを挿入</button>
-      <button>画像を挿入</button>
-      <button>動画を挿入</button>
-      <textarea id="htmlTextarea" rows="20"></textarea>
-    </div>
 
-    <div id="nocodeEditor" style="display: none;">
-      <button id="makeWithHtmlBtn">ノーコードで作成</button>
-      <button>元に戻す</button>
-      <button>やり直し</button>
-      <button>検索</button>
-      <button>太字</button>
-      <button>斜体</button>
-      <button>取り消し線</button>
-      <button>リンクを挿入</button>
-      <button>画像を挿入</button>
-      <button>動画を挿入</button>
-      <div id="nocodeEditArea" rows="20"></div>
+  <div id="editorWrap">
+    <h1>ページ作成</h1>
+    <div class="simple-wysiwyg">
+      <div class="toolbar">
+        <div class="line">
+  
+          <div class="box">
+            <span class="editor-btn icon smaller" data-action="bold" data-tag-name="b" title="太字">
+              <img src="https://img.icons8.com/fluency-systems-filled/48/000000/bold.png" />
+            </span>
+            <span class="editor-btn icon smaller" data-action="italic" data-tag-name="i" title="斜体">
+              <img src="https://img.icons8.com/fluency-systems-filled/48/000000/italic.png" />
+            </span>
+            <span class="editor-btn icon smaller" data-action="underline" data-tag-name="u" title="下線">
+              <img src="https://img.icons8.com/fluency-systems-filled/48/000000/underline.png" />
+            </span>
+            <span class="editor-btn icon smaller" data-action="strikeThrough" data-tag-name="strike" title="取消線">
+              <img src="https://img.icons8.com/fluency-systems-filled/30/000000/strikethrough.png" />
+            </span>
+          </div>
+  
+          <div class="box">
+            <span class="editor-btn icon has-submenu">
+              <img src="https://img.icons8.com/fluency-systems-filled/48/000000/align-left.png" />
+              <div class="submenu">
+                <span class="editor-btn icon" data-action="justifyLeft" data-style="textAlign:left" title="左揃え">
+                  <img src="https://img.icons8.com/fluency-systems-filled/48/000000/align-left.png" />
+                </span>
+                <span class="editor-btn icon" data-action="justifyCenter" data-style="textAlign:center" title="中央揃え">
+                  <img src="https://img.icons8.com/fluency-systems-filled/48/000000/align-center.png" />
+                </span>
+                <span class="editor-btn icon" data-action="justifyRight" data-style="textAlign:right" title="右揃え">
+                  <img src="https://img.icons8.com/fluency-systems-filled/48/000000/align-right.png" />
+                </span>
+                <span class="editor-btn icon" data-action="formatBlock" data-style="textAlign:justify" title="両端揃え">
+                  <img src="https://img.icons8.com/fluency-systems-filled/48/000000/align-justify.png" />
+                </span>
+              </div>
+            </span>
+  
+            <span class="editor-btn icon" data-action="insertOrderedList" data-tag-name="ol" title="番号付きリスト">
+              <img src="https://img.icons8.com/fluency-systems-filled/48/000000/numbered-list.png" />
+            </span>
+            <span class="editor-btn icon" data-action="insertUnorderedList" data-tag-name="ul" title="箇条書き">
+              <img src="https://img.icons8.com/fluency-systems-filled/48/000000/bulleted-list.png" />
+            </span>
+            <span class="editor-btn icon" data-action="outdent" title="インデントを減らす" data-required-tag="li">
+              <img src="https://img.icons8.com/fluency-systems-filled/48/000000/outdent.png" />
+            </span>
+            <span class="editor-btn icon" data-action="indent" title="インデントを増やす">
+              <img src="https://img.icons8.com/fluency-systems-filled/48/000000/indent.png" />
+            </span>
+  
+          </div>
+          <div class="box">
+            <span class="editor-btn icon" data-action="insertHorizontalRule" title="水平線">
+              <img src="https://img.icons8.com/fluency-systems-filled/48/000000/horizontal-line.png" />
+            </span>
+          </div>
+  
+        </div>
+        <div class="line">
+  
+          <div class="box">
+            <span class="editor-btn icon smaller" data-action="undo" title="アンドゥ">
+              <img src="https://img.icons8.com/fluency-systems-filled/48/000000/undo--v1.png" />
+            </span>
+            <span class="editor-btn icon" data-action="removeFormat" title="文字修飾の解除">
+              <img src="https://img.icons8.com/fluency-systems-filled/48/000000/remove-format.png" />
+            </span>
+          </div>
+  
+          <div class="box">
+            <span class="editor-btn icon smaller" data-action="createLink" title="リンクの挿入">
+              <img src="https://img.icons8.com/fluency-systems-filled/48/000000/add-link.png" />
+            </span>
+  
+            <span class="editor-btn icon smaller" data-action="unlink" data-tag-name="a" title="リンク取消">
+              <img src="https://img.icons8.com/fluency-systems-filled/48/000000/delete-link.png" />
+            </span>
+          </div>
+  
+          <div class="box">
+            <span class="editor-btn icon" data-action="toggle-view" title="HTMLコードの表示">
+              <img src="https://img.icons8.com/fluency-systems-filled/48/000000/source-code.png" />
+            </span>
+          </div>
+  
+        </div>
+      </div>
+      <div class="content-area">
+        <div class="visuell-view" contenteditable></div>
+        <textarea id="htmlTextarea" class="html-view"></textarea>
+      </div>
     </div>
+  
+    <div class="modal">
+      <div class="modal-bg"></div>
+      <div class="modal-wrapper">
+        <div class="close">✖</div>
+        <div class="modal-content" id="modalCreateLink">
+          <h3>リンクの挿入</h3>
+          <input type="text" id="linkValue" placeholder="Link (例: https://xxxx.co.jp/)">
+          <div class="row">
+            <input type="checkbox" id="new-tab">
+            <label for="new-tab">新しいタブで表示</label>
+          </div>
+          <button class="done">完了</button>
+        </div>
+      </div>
+    </div>
+  
+
 
     <!-- プレビュー関連 -->
     <button id="previewBtn">プレビュー</button>
   </div>
 
-  <div id="previewArea" style="display: none;">
+  <div id="previewArea" style="display: none;"></div>
 
-  </div>
-
+  <!-- Editor JS -->
+  <script th:src="@{/js/wysiwygEditor.js}"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+    crossorigin="anonymous"></script>
 
   <script>
-    const editorElm = document.getElementById("editor");
+    const editorWrapElm = document.getElementById("editorWrap");
     const htmlTextarea = document.getElementById("htmlTextarea");
-    const nocodeEditArea = document.getElementById("nocodeEditArea");
     const previewBtn = document.getElementById("previewBtn");
-    const makeWithNocodeBtn = document.getElementById("makeWithNocodeBtn");
-    const makeWithHtmlBtn = document.getElementById("makeWithHtmlBtn");
     const previewArea = document.getElementById("previewArea");
 
 
     //プレビューボタンが押されたらプレビューを表示
     previewBtn.addEventListener("click", () => {
       //エディターを非表示にし、プレビューエリアを表示する
-      editorElm.style = "display: none;";
+      editorWrapElm.style = "display: none;";
       previewArea.style = "display: block;";
 
       //エディターで作成したhtmlを、プレビューに反映
@@ -74,11 +163,9 @@
 
       //戻るボタンが押されたとき、プレビューから戻る
       returnToEditorBtn.addEventListener("click", () => {
-        editorElm.style = "display: block;";
+        editorWrapElm.style = "display: block;";
         previewArea.style = "display: none;";
       })
-
-
     })
 
   </script>
