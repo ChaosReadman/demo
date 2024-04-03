@@ -10,17 +10,17 @@
         <div th:insert="~{/members/navbar}" />
         <input id="csrf" type="hidden" th:name="${_csrf.headerName}" th:value="${_csrf.token}" />
         
-        <div class="topnews">
-            <p><b>お知らせ</b></p>
-            <div class="infoform">
-                <table id="infos">
-                </table>
-            </div>
-        </div>
-        <div class="topchat">
-            <p><b>掲示板</b></p>
-            <div class="msgform" id="msgs"></div>
-        </div>
+        <!-- <div class="flexWrap"> -->
+            <span class="topnews">
+                <p><b>お知らせ</b></p>
+                <div class="msgform" id="infos"></div>
+            </span>
+            
+            <span class="topchat">
+                <p><b>掲示板</b></p>
+                <div class="msgform" id="msgs"></div>
+            </span>
+        <!-- </div> -->
 
     <script th:src="@{/js/refreshMsg.js}"></script>
     <script th:src="@{/js/http.js}"></script>
@@ -38,7 +38,7 @@
         function refreshInfo() {
             getRequest("/members/getinfo", function(response){
                 refreshInfoTbl(response);
-                var  form = document.getElementsByClassName("infoform");
+                var  form = document.getElementsByClassName("msgform");
                 form[0].scrollTo(0, msgs.scrollHeight);
             });
         }
@@ -48,8 +48,7 @@
             var tb = document.getElementById("infos");
             tb.innerHTML = "";
             js.forEach(element => {
-                tb.innerHTML += 
-                '<tr><td><textarea>' + element.message + '</textarea></td></tr>';
+                tb.innerHTML += `<div class="msgRow">${element.message}</div>`;
             });
         }
     </script>

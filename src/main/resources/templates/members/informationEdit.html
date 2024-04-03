@@ -4,10 +4,135 @@
 <head>
     <meta charset="UTF-8">
     <title>おしらせ投稿フォーム</title>
-
+    <link rel="stylesheet" th:href="@{/wysiwygEditor.css}" />
 </head>
 
 <body onload="init()">
+    <div th:insert="~{/members/navbar}"> </div>
+    <div id="editorWrap">
+        <h1>おしらせ投稿</h1>
+        <div id="simpleWysiwyg" class="simple-wysiwyg">
+            <div id="toolbar">
+                <div class="line">
+
+                    <div class="box">
+                        <span id="boldBtn" class="editor-btn icon smaller" title="太字">
+                            <img th:src="@{/wysiwygImg/bold.png}" />
+                        </span>
+                        <span id="italicBtn" class="editor-btn icon smaller" title="斜体">
+                            <img th:src="@{/wysiwygImg/italic.png}" />
+                        </span>
+                        <span id="underlineBtn" class="editor-btn icon smaller" title="下線">
+                            <img th:src="@{/wysiwygImg/underline.png}" />
+                        </span>
+                        <span id="strikethroughBtn" class="editor-btn icon smaller" title="取消線">
+                            <img th:src="@{/wysiwygImg/strikethrough.png}" />
+                        </span>
+                    </div>
+
+                    <div class="box">
+                        <span class="editor-btn icon has-submenu">
+                            <img th:src="@{/wysiwygImg/align-left.png}" />
+                            <div class="submenu">
+                                <span id="alignLeftBtn" class="editor-btn icon" title="左揃え">
+                                    <img th:src="@{/wysiwygImg/align-left.png}" />
+                                </span>
+                                <span id="alignCenterBtn" class="editor-btn icon" title="中央揃え">
+                                    <img th:src="@{/wysiwygImg/align-center.png}" />
+                                </span>
+                                <span id="alignRightBtn" class="editor-btn icon" title="右揃え">
+                                    <img th:src="@{/wysiwygImg/align-right.png}" />
+                                </span>
+                                <span id="alignJustifyBtn" class="editor-btn icon" title="両端揃え">
+                                    <img th:src="@{/wysiwygImg/align-justify.png}" />
+                                </span>
+                            </div>
+                        </span>
+                        <span id="numberedListBtn" class="editor-btn icon" title="番号付きリスト">
+                            <img th:src="@{/wysiwygImg/numbered-list.png}" />
+                        </span>
+                        <span id="bulletedListBtn" class="editor-btn icon" title="箇条書き">
+                            <img th:src="@{/wysiwygImg/bulleted-list.png}" />
+                        </span>
+                        <span id="outdentBtn" class="editor-btn icon" title="インデントを減らす">
+                            <img th:src="@{/wysiwygImg/outdent.png}" />
+                        </span>
+                        <span id="indentBtn" class="editor-btn icon" title="インデントを増やす">
+                            <img class="editor-btn icon" th:src="@{/wysiwygImg/indent.png}" />
+                        </span>
+
+                    </div>
+                    <div class="box">
+                        <span id="horizontalLineBtn" class="editor-btn icon" title="水平線">
+                            <img th:src="@{/wysiwygImg/horizontal-line.png}" />
+                        </span>
+                    </div>
+
+                </div>
+                <div class="line">
+
+                    <div class="box">
+                        <span id="undoBtn" class="editor-btn icon smaller" title="アンドゥ">
+                            <img th:src="@{/wysiwygImg/undo.png}" />
+                        </span>
+                        <span id="removeFormatBtn" class="editor-btn icon" title="文字修飾の解除">
+                            <img th:src="@{/wysiwygImg/remove-format.png}" />
+                        </span>
+                    </div>
+
+                    <div class="box">
+                        <span id="addLinkBtn" class="editor-btn icon smaller" title="リンクの挿入">
+                            <img th:src="@{/wysiwygImg/add-link.png}" />
+                        </span>
+                        <span id="deleteLinkBtn" class="editor-btn icon smaller" title="リンク取消">
+                            <img th:src="@{/wysiwygImg/delete-link.png}" />
+                        </span>
+                    </div>
+
+                    <div class="box">
+                        <span id="showHtmlBtn" class="editor-btn icon" title="HTMLコードの表示">
+                            <img th:src="@{/wysiwygImg/source-code.png}" />
+                        </span>
+                    </div>
+
+                </div>
+            </div>
+            <div id="content-area">
+                <div id="visualView" class="visuell-view" contenteditable></div>
+                <textarea id="htmlView" class="html-view" style="display: none;"></textarea>
+            </div>
+        </div>
+
+        <div id="modal">
+            <div id="modal-bg"></div>
+            <div id="modal-wrapper">
+                <div id="close">✖</div>
+                <div id="modal-content">
+                    <h3>リンクの挿入</h3>
+                    <input type="text" id="linkValue" placeholder="Link (例: https://xxxx.co.jp/)">
+                    <div class="row">
+                        <input type="checkbox" id="new-tab">
+                        <label for="new-tab">新しいタブで表示</label>
+                    </div>
+                    <button class="done">完了</button>
+                </div>
+            </div>
+        </div>
+
+        <button id="previewBtn">プレビュー</button>
+        <select id="publicationRange">
+            <option>全員</option>
+            <option>メンバーのみ</option>
+            <option>非公開</option>
+        </select>
+        <button id="send" onclick='postInfo();'>送信</button>
+    </div>
+
+    <div id="infos" class="infoform msgform">
+        
+    </div>
+
+    <script th:src="@{/js/wysiwygEditor.js}"></script>
     <script th:src="@{/js/http.js}"></script>
     <script type="text/javascript">
         function init() {
@@ -17,11 +142,11 @@
         function postInfo() {
             const url = "/members/insertinfo";
             let data = JSON.stringify({
-                message: document.getElementById("message").value
+                message: visualView.innerHTML
             });
 
             postRequest(url, data, () => {
-                document.getElementById("message").value = "";
+                visualView.innerHTML = "";
                 refreshInfo();
             });
         }
@@ -30,35 +155,20 @@
             const url = "/members/getinfo";
             getRequest(url, (res) => {
                 refreshInfoTbl(res);
-                var  form = document.getElementsByClassName("infoform");
-                form[0].scrollTo(0, msg.scrollHeight);
             });
         }
 
         function refreshInfoTbl(tjs) {
             var js = JSON.parse(tjs);
-            var tr;
-            var td;
             var tb = document.getElementById("infos");
             tb.innerHTML = "";
             js.forEach(element => {
-                tb.innerHTML += 
-                '<tr><td><textarea>' + element.message + '</textarea></td></tr>';
+                tb.innerHTML += `<div class="msgRow">${element.message}</div>`;
             });
         }
     </script>
-    
-    <div th:insert="~{/members/navbar}"> </div>
-    <div id="msg">
-        <label>おしらせ投稿</label>
-        <input id="csrf" type="hidden" th:name="${_csrf.headerName}" th:value="${_csrf.token}" />
-        <textarea id="message" rows="20" cols="40">あいうえお</textarea>
-        <button id="send" onclick='postInfo();'>送信</button>
-    </div>
-    <form class="infoform">
-        <table id="infos">
-        </table>
-    </form>
+
+    <input id="csrf" type="hidden" th:name="${_csrf.headerName}" th:value="${_csrf.token}" />
 </body>
 
 </html>

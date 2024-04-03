@@ -6,115 +6,114 @@
   <title>ページ作成</title>
     <!-- Style CSS -->
     <link rel="stylesheet" th:href="@{/makePage.css}" />
+    <link rel="stylesheet" th:href="@{/wysiwygEditor.css}" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
       integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
 </head>
 
 <body>
   <div th:insert="~{/members/navbar}"> </div>
-
-
+  
+  
   <div id="editorWrap">
     <h1>ページ作成</h1>
-    <div class="simple-wysiwyg">
-      <div class="toolbar">
+    <div id="simpleWysiwyg" class="simple-wysiwyg">
+      <div id="toolbar">
         <div class="line">
-  
+
           <div class="box">
-            <span class="editor-btn icon smaller" data-action="bold" data-tag-name="b" title="太字">
-              <img src="https://img.icons8.com/fluency-systems-filled/48/000000/bold.png" />
+            <span id="boldBtn" class="editor-btn icon smaller" title="太字">
+              <img th:src="@{/wysiwygImg/bold.png}" />
             </span>
-            <span class="editor-btn icon smaller" data-action="italic" data-tag-name="i" title="斜体">
-              <img src="https://img.icons8.com/fluency-systems-filled/48/000000/italic.png" />
+            <span id="italicBtn" class="editor-btn icon smaller" title="斜体">
+              <img th:src="@{/wysiwygImg/italic.png}" />
             </span>
-            <span class="editor-btn icon smaller" data-action="underline" data-tag-name="u" title="下線">
-              <img src="https://img.icons8.com/fluency-systems-filled/48/000000/underline.png" />
+            <span id="underlineBtn" class="editor-btn icon smaller" title="下線">
+              <img th:src="@{/wysiwygImg/underline.png}" />
             </span>
-            <span class="editor-btn icon smaller" data-action="strikeThrough" data-tag-name="strike" title="取消線">
-              <img src="https://img.icons8.com/fluency-systems-filled/30/000000/strikethrough.png" />
+            <span id="strikethroughBtn" class="editor-btn icon smaller" title="取消線">
+              <img th:src="@{/wysiwygImg/strikethrough.png}" />
             </span>
           </div>
-  
+
           <div class="box">
             <span class="editor-btn icon has-submenu">
-              <img src="https://img.icons8.com/fluency-systems-filled/48/000000/align-left.png" />
+              <img th:src="@{/wysiwygImg/align-left.png}" />
               <div class="submenu">
-                <span class="editor-btn icon" data-action="justifyLeft" data-style="textAlign:left" title="左揃え">
-                  <img src="https://img.icons8.com/fluency-systems-filled/48/000000/align-left.png" />
+                <span id="alignLeftBtn" class="editor-btn icon" title="左揃え">
+                  <img th:src="@{/wysiwygImg/align-left.png}" />
                 </span>
-                <span class="editor-btn icon" data-action="justifyCenter" data-style="textAlign:center" title="中央揃え">
-                  <img src="https://img.icons8.com/fluency-systems-filled/48/000000/align-center.png" />
+                <span id="alignCenterBtn" class="editor-btn icon" title="中央揃え">
+                  <img th:src="@{/wysiwygImg/align-center.png}" />
                 </span>
-                <span class="editor-btn icon" data-action="justifyRight" data-style="textAlign:right" title="右揃え">
-                  <img src="https://img.icons8.com/fluency-systems-filled/48/000000/align-right.png" />
+                <span id="alignRightBtn" class="editor-btn icon" title="右揃え">
+                  <img th:src="@{/wysiwygImg/align-right.png}" />
                 </span>
-                <span class="editor-btn icon" data-action="formatBlock" data-style="textAlign:justify" title="両端揃え">
-                  <img src="https://img.icons8.com/fluency-systems-filled/48/000000/align-justify.png" />
+                <span id="alignJustifyBtn" class="editor-btn icon" title="両端揃え">
+                  <img th:src="@{/wysiwygImg/align-justify.png}" />
                 </span>
               </div>
             </span>
-  
-            <span class="editor-btn icon" data-action="insertOrderedList" data-tag-name="ol" title="番号付きリスト">
-              <img src="https://img.icons8.com/fluency-systems-filled/48/000000/numbered-list.png" />
+            <span id="numberedListBtn" class="editor-btn icon" title="番号付きリスト">
+              <img th:src="@{/wysiwygImg/numbered-list.png}" />
             </span>
-            <span class="editor-btn icon" data-action="insertUnorderedList" data-tag-name="ul" title="箇条書き">
-              <img src="https://img.icons8.com/fluency-systems-filled/48/000000/bulleted-list.png" />
+            <span id="bulletedListBtn" class="editor-btn icon" title="箇条書き">
+              <img th:src="@{/wysiwygImg/bulleted-list.png}" />
             </span>
-            <span class="editor-btn icon" data-action="outdent" title="インデントを減らす" data-required-tag="li">
-              <img src="https://img.icons8.com/fluency-systems-filled/48/000000/outdent.png" />
+            <span id="outdentBtn" class="editor-btn icon" title="インデントを減らす">
+              <img th:src="@{/wysiwygImg/outdent.png}" />
             </span>
-            <span class="editor-btn icon" data-action="indent" title="インデントを増やす">
-              <img src="https://img.icons8.com/fluency-systems-filled/48/000000/indent.png" />
+            <span id="indentBtn" class="editor-btn icon" title="インデントを増やす">
+              <img class="editor-btn icon" th:src="@{/wysiwygImg/indent.png}" />
             </span>
-  
+
           </div>
           <div class="box">
-            <span class="editor-btn icon" data-action="insertHorizontalRule" title="水平線">
-              <img src="https://img.icons8.com/fluency-systems-filled/48/000000/horizontal-line.png" />
+            <span id="horizontalLineBtn" class="editor-btn icon" title="水平線">
+              <img th:src="@{/wysiwygImg/horizontal-line.png}" />
             </span>
           </div>
-  
+
         </div>
         <div class="line">
-  
+
           <div class="box">
-            <span class="editor-btn icon smaller" data-action="undo" title="アンドゥ">
-              <img src="https://img.icons8.com/fluency-systems-filled/48/000000/undo--v1.png" />
+            <span id="undoBtn" class="editor-btn icon smaller" title="アンドゥ">
+              <img th:src="@{/wysiwygImg/undo.png}" />
             </span>
-            <span class="editor-btn icon" data-action="removeFormat" title="文字修飾の解除">
-              <img src="https://img.icons8.com/fluency-systems-filled/48/000000/remove-format.png" />
+            <span id="removeFormatBtn" class="editor-btn icon" title="文字修飾の解除">
+              <img th:src="@{/wysiwygImg/remove-format.png}" />
             </span>
           </div>
-  
+
           <div class="box">
-            <span class="editor-btn icon smaller" data-action="createLink" title="リンクの挿入">
-              <img src="https://img.icons8.com/fluency-systems-filled/48/000000/add-link.png" />
+            <span id="addLinkBtn" class="editor-btn icon smaller" title="リンクの挿入">
+              <img th:src="@{/wysiwygImg/add-link.png}" />
             </span>
-  
-            <span class="editor-btn icon smaller" data-action="unlink" data-tag-name="a" title="リンク取消">
-              <img src="https://img.icons8.com/fluency-systems-filled/48/000000/delete-link.png" />
+            <span id="deleteLinkBtn" class="editor-btn icon smaller" title="リンク取消">
+              <img th:src="@{/wysiwygImg/delete-link.png}" />
             </span>
           </div>
-  
+
           <div class="box">
-            <span class="editor-btn icon" data-action="toggle-view" title="HTMLコードの表示">
-              <img src="https://img.icons8.com/fluency-systems-filled/48/000000/source-code.png" />
+            <span id="showHtmlBtn" class="editor-btn icon" title="HTMLコードの表示">
+              <img th:src="@{/wysiwygImg/source-code.png}" />
             </span>
           </div>
-  
+
         </div>
       </div>
-      <div class="content-area">
-        <div class="visuell-view" contenteditable></div>
-        <textarea id="htmlTextarea" class="html-view"></textarea>
+      <div id="content-area">
+        <div id="visualView" class="visuell-view" contenteditable></div>
+        <textarea id="htmlView" class="html-view" style="display: none;"></textarea>
       </div>
     </div>
-  
-    <div class="modal">
-      <div class="modal-bg"></div>
-      <div class="modal-wrapper">
-        <div class="close">✖</div>
-        <div class="modal-content" id="modalCreateLink">
+
+    <div id="modal">
+      <div id="modal-bg"></div>
+      <div id="modal-wrapper">
+        <div id="close">✖</div>
+        <div id="modal-content">
           <h3>リンクの挿入</h3>
           <input type="text" id="linkValue" placeholder="Link (例: https://xxxx.co.jp/)">
           <div class="row">
@@ -125,8 +124,6 @@
         </div>
       </div>
     </div>
-  
-
 
     <button id="previewBtn">プレビュー</button>
     <select id="publicationRange">
@@ -158,12 +155,11 @@
       previewArea.style = "display: block;";
 
       //エディターで作成したhtmlを、プレビューに反映
-      previewArea.innerHTML = htmlTextarea.value;
+      console.log(htmlView);
+      previewArea.innerHTML = visualView.innerHTML;
 
       //プレビューから戻るボタンを作成し表示
       previewArea.innerHTML += "<div><button id='returnToEditorBtn'>戻る</button></div>";
-      returnToEditorBtn = document.getElementById("returnToEditorBtn");
-
 
       //戻るボタンが押されたとき、プレビューから戻る
       returnToEditorBtn.addEventListener("click", () => {

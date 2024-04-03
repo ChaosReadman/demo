@@ -1,19 +1,7 @@
-/* .topChat, .topNews{
-  font-family: Impact, sans-serif;
-  width: 400px;
-  height: 200px;
-} */
-
-.topNews {
+.topnews {
     font-family: Impact, sans-serif;
     width: 400px;
-    height: 200px;
-    background-color: hsl(199, 70%, 59%);
 }
-
-/* .topChat {
-    background-color: aqua;
-} */
 
 .linkList {
     background-color: lightpink;
@@ -68,14 +56,14 @@
 .userInfo {
     position: absolute;
     right: 0;
-    margin: 0 70px 0 0; 
+    margin: 0 70px 0 0;
 }
 
 .userInfo span {
     display: block;
 }
 
-.loginUser{
+.loginUser {
     display: block;
     margin-right: 0;
     margin-left: auto;
@@ -160,25 +148,26 @@
 
 .msgform {
     background-color: #eee;
-    height: 400px;
+    /* height: 30%; */
     width: 100%;
-    overflow-y:auto;
+    margin: 1rem;
+    overflow-y: scroll;
 }
 
 div.msgform {
-  width: 400px;
+    width: 400px;
 }
 
-.msgform .msgRow{ 
-    border-top: solid #ccc 1px; 
+.msgform .msgRow {
+    border-top: solid #ccc 1px;
 }
 
 .msgform .msgRow div {
-  padding: 10px;
+    padding: 10px;
 }
 
 .saidMsg {
-  overflow-wrap: break-word;
+    overflow-wrap: break-word;
 }
 
 #pageTitle {
@@ -193,7 +182,7 @@ div.msgform {
     width: 30%;
 }
 
-#msg > * {
+#msg>* {
     margin-top: 5px;
     display: block;
 }
@@ -202,6 +191,19 @@ div.msgform {
     text-align: center;
 }
 
-.button-set button{
+.button-set button {
     width: 80px;
+}
+
+#editorWrap {
+    margin: 2rem;
+}
+
+#infos{
+    height: 30%;
+    margin-bottom: 2rem;
+}
+
+#msgs{
+    height: 30%;
 }
