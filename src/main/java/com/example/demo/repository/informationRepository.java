@@ -13,11 +13,6 @@ import com.example.demo.model.information;
 public interface informationRepository  extends JpaRepository<information, Integer>{
     @Transactional
     @Modifying
-    @Query(value="insert into information (message) values(:#{#info.message}, :#{#lnk.url})", nativeQuery = true)
+    @Query(value="insert into information (message, category) values(:#{#info.message}, :#{#info.category})", nativeQuery = true)
     public abstract void insert(@Param("info") information info);
-
-    // @Modifying
-    // @Transactional
-    // @Query(value="insert into information (category) values(:#{#info.category})", nativeQuery = true)
-    // public abstract void insertCategory(@Param("category") information category);
 }

@@ -66,8 +66,10 @@ public class MainRestController {
     @PostMapping("/members/insertinfo")
     public ResponseEntity<?> insertinfo(@RequestBody information info) {
         if (!info.getMessage().equals("")) {
+            System.out.println(info.toString());
             infor.insert(info);
             info.setMessage("");
+            info.setCategory("");
         }
         return ResponseEntity.ok().build();
     }

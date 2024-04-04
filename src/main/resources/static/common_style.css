@@ -158,6 +158,10 @@ div.msgform {
     width: 400px;
 }
 
+.msgRow {
+    padding: 1rem;
+}
+
 .msgform .msgRow {
     border-top: solid #ccc 1px;
 }
@@ -200,7 +204,7 @@ div.msgform {
 }
 
 #infos{
-    height: 30%;
+    max-height: 30%;
     margin-bottom: 2rem;
 }
 

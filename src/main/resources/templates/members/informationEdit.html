@@ -119,12 +119,12 @@
             </div>
         </div>
 
-        <button id="previewBtn">プレビュー</button>
-        <select id="publicationRange">
-            <option>全員</option>
-            <option>メンバーのみ</option>
-            <option>非公開</option>
+        <select id="category">
+            <option>内部向け</option>
+            <option>外部向け</option>
+            <option>その他</option>
         </select>
+
         <button id="send" onclick='postInfo();'>送信</button>
     </div>
 
@@ -142,7 +142,8 @@
         function postInfo() {
             const url = "/members/insertinfo";
             let data = JSON.stringify({
-                message: visualView.innerHTML
+                message: visualView.innerHTML,
+                category: category.selectedOptions[0].value
             });
 
             postRequest(url, data, () => {
