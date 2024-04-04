@@ -27,4 +27,7 @@ public class information {
 
     @Column(columnDefinition="TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
     private Date lastUpdateDate;
+
+    @Column(length = 128)
+    private String category;
 }

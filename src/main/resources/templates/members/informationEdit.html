@@ -162,9 +162,11 @@
             var js = JSON.parse(tjs);
             var tb = document.getElementById("infos");
             tb.innerHTML = "";
+            console.log(tjs);
             js.forEach(element => {
                 tb.innerHTML += `<div class="msgRow">${element.message}</div>`;
             });
+
         }
     </script>
 
